@@ -27,7 +27,7 @@ public class Puzzle {
 		int d=1;
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
-				if(i!=0 &&j!=0) {
+				if(i+j!=0) {
 					tabS[i][j]=d;
 					d++;
 				}
@@ -69,8 +69,11 @@ public class Puzzle {
 	public boolean isSuccess() {
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
-				if(tab[i][j]!=tabS[i][j])
+				if(tab[i][j]!=tabS[i][j]) {
+					//System.out.println(tab[i][j]+"/"+tabS[i][j]);
 					return false;
+
+				}
 			}
 		}
 		
