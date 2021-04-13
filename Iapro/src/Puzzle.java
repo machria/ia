@@ -15,6 +15,27 @@ public class Puzzle {
 		init();
 	}
 	
+	
+	public int[][] getTab() {
+		return tab;
+	}
+
+
+	public void setTab(int[][] tab) {
+		this.tab = tab;
+	}
+
+
+	public int[][] getTabS() {
+		return tabS;
+	}
+
+
+	public void setTabS(int[][] tabS) {
+		this.tabS = tabS;
+	}
+
+
 	public void init() {
 		int valueMax = (n*n)-1;
 		ArrayList<Integer> a = new ArrayList<>();
@@ -96,14 +117,14 @@ public class Puzzle {
 			if(!change && tab[x-1][y]==a) {
 				change = true;
 				tab[x][y]=a;
-				tab[x-1][y]=-1;
+				tab[x-1][y]=-1; //Bas
 			}
 			
 		}
 		if(!change && x+1<n &&tab[x+1][y]==a) {
 			change = true;
 			tab[x+1][y]=-1;
-			tab[x][y]=a;
+			tab[x][y]=a;//Haut
 
 		}
 
@@ -111,17 +132,155 @@ public class Puzzle {
 			if(!change && tab[x][y-1]==a) {
 				change = true;
 				tab[x][y]=a;
-				tab[x][y-1]=-1;
+				tab[x][y-1]=-1;//Gauche
 			}
 		
 		}
 		if(!change && y+1< n && tab[x][y+1]==a) {
 			change = true;
 			tab[x][y]=a;
-			tab[x][y+1]=-1;
+			tab[x][y+1]=-1; //Droite
 		}
 			
 	}
-	
+	public boolean moveHaut() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		boolean change = false;
+		if(!change && x+1<n ) {
+			change = true;
+			return true;
 
+		}
+		return false;
+		
+	}
+	public boolean moveBas() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		boolean change = false;
+		if(x-1>=0) {
+			if(!change ) {
+				change = true;
+				return true;
+			}
+			
+		}
+		return false;
+	}
+	public boolean moveDroit() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		boolean change = false;
+		if(!change && y+1< n ) {
+			change = true;
+			return true;
+		}
+		return false;
+	}
+	public boolean moveGauche() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		boolean change = false;
+		if(!change &&y-1>=0) {
+			if(!change) {
+				change = true;
+				return true;
+			}
+		
+		}
+		return false;
+	}
+	public Puzzle Haut() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		tab[x][y]=tab[x+1][y];//Haut
+		tab[x+1][y]=-1;
+		return this;
+	}
+	public Puzzle Bas() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		tab[x][y]=tab[x-1][y];
+		tab[x-1][y]=-1; //Bas
+		return this;
+	}
+	public Puzzle Droite() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		tab[x][y]=tab[x][y+1];
+		tab[x][y+1]=-1; //Droite
+		return this;
+	}
+	public Puzzle Gauche() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		tab[x][y]=tab[x][y-1];
+		tab[x][y-1]=-1;//Gauche
+		return this;
+	}
 }
