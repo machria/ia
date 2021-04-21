@@ -1,9 +1,13 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class Puzzle {
 	
+
+	
 	private int n;
+	private static final String[] ACTIONS = { "H", "B", "G", "D" };
 	private int[][] tab;
 	private int[][] tabS;
 	
@@ -12,7 +16,24 @@ public class Puzzle {
 		this.tab =new int[n][n];
 		this.tabS =new int[n][n];
 
-		init();
+		init2();
+	}
+	
+	public Puzzle() {
+		
+	}
+	
+	public Puzzle(Puzzle x) {
+		this.n = x.n;
+		this.tab =new int[n][n];
+		this.tabS =new int[n][n];
+		this.init();
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				tab[i][j]=x.tab[i][j];
+			}
+		}
+		this.tabS=x.tabS;
 	}
 	
 	
@@ -143,7 +164,7 @@ public class Puzzle {
 		}
 			
 	}
-	public boolean moveHaut() {
+	public boolean moveBas() {
 		int x = -93,y = -93;
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
@@ -163,7 +184,7 @@ public class Puzzle {
 		return false;
 		
 	}
-	public boolean moveBas() {
+	public boolean moveHaut() {
 		int x = -93,y = -93;
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
@@ -184,7 +205,7 @@ public class Puzzle {
 		}
 		return false;
 	}
-	public boolean moveDroit() {
+	public boolean moveDroite() {
 		int x = -93,y = -93;
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
@@ -223,7 +244,7 @@ public class Puzzle {
 		}
 		return false;
 	}
-	public Puzzle Haut() {
+	public Puzzle Bas() {
 		int x = -93,y = -93;
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
@@ -238,7 +259,7 @@ public class Puzzle {
 		tab[x+1][y]=-1;
 		return this;
 	}
-	public Puzzle Bas() {
+	public Puzzle Haut() {
 		int x = -93,y = -93;
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
@@ -282,5 +303,94 @@ public class Puzzle {
 		tab[x][y]=tab[x][y-1];
 		tab[x][y-1]=-1;//Gauche
 		return this;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + n;
+		result = prime * result + Arrays.deepHashCode(tab);
+		result = prime * result + Arrays.deepHashCode(tabS);
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Puzzle other = (Puzzle) obj;
+		if (n != other.n)
+			return false;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]!=other.tab[i][j]) {
+					return false;
+				}
+			}
+		}
+			
+		return true;
+	}
+	
+	public void init2() {
+		int valueMax = (n*n)-1;
+		ArrayList<Integer> a = new ArrayList<>();
+		tabS[0][0]=-1;
+		for(int i = 1;i<=valueMax;i++) {
+			a.add(i);
+			
+		}
+		a.add(-1);
+		int d=1;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(i+j!=0) {
+					tabS[i][j]=d;
+					d++;
+				}
+				
+			}
+		}
+		
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				tab[i][j]=tabS[i][j];
+					
+
+				
+			}
+		}
+		
+		
+		for (int i = 0 ; i < 100; i++) {
+			for(String b :ACTIONS) {
+				switch(b) {
+				case "H": 
+					if(this.moveHaut()) {
+						this.Haut();
+					}
+					break;
+				case "B ": if(this.moveBas()) {
+					this.Bas();
+				}
+					break;
+				case "G":if(this.moveGauche()) {
+					this.Gauche();
+				}
+					break;
+				case "D": if(this.moveDroite()) {
+					this.Droite();
+				}
+					break;
+				default:
+					break;
+				}
+		}
+		}
 	}
 }
