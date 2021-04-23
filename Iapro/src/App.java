@@ -12,7 +12,11 @@ public class App {
 		 */
 		BFS bfs = new BFS(p);
 		System.out.println(bfs.bfs());
-		bfs.getTruePlat().print();
+		//bfs.getTruePlat().print();
+		System.out.println(bfs.getTruePlat().getListMove().size());
+		for (int i =0; i<bfs.getTruePlat().getListMove().size();i++) {
+			System.out.println(bfs.getTruePlat().getListMove().get(i));
+		}
 		
 	}
 

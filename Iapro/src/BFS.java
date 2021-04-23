@@ -24,11 +24,11 @@ public class BFS {
 		while (true) {
 			if (this.frontier.isEmpty())
 				return false;
-			System.out.println(this.frontier.size());
-			System.out.println(this.explored.size());
+			//System.out.println(this.frontier.size());
+			//System.out.println(this.explored.size());
 			Puzzle node = this.frontier.poll();
 			this.explored.add(node);
-			node.print();
+			//node.print();
 			
 			for (String b : ACTIONS) {
 				Puzzle child = new Puzzle(node);

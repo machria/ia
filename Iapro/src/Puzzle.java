@@ -10,13 +10,15 @@ public class Puzzle {
 	private static final String[] ACTIONS = { "H", "B", "G", "D" };
 	private int[][] tab;
 	private int[][] tabS;
+	private int move=0;
+	private ArrayList<String> listMove=new ArrayList<>();
 	
 	public Puzzle(int n) {
 		this.n = n;
 		this.tab =new int[n][n];
 		this.tabS =new int[n][n];
 
-		init2();
+		init();
 	}
 	
 	public Puzzle() {
@@ -34,9 +36,29 @@ public class Puzzle {
 			}
 		}
 		this.tabS=x.tabS;
+		this.move=x.move;
+		for (int i =0; i<x.getListMove().size();i++) {
+			this.listMove.add(x.getListMove().get(i));
+		}
 	}
 	
 	
+	public int getMove() {
+		return move;
+	}
+
+	public void setMove(int move) {
+		this.move = move;
+	}
+
+	public ArrayList<String> getListMove() {
+		return listMove;
+	}
+
+	public void setListMove(ArrayList<String> listMove) {
+		this.listMove = listMove;
+	}
+
 	public int[][] getTab() {
 		return tab;
 	}
@@ -94,6 +116,7 @@ public class Puzzle {
 	}
 	
 	public void print() {
+		
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
 				if(tab[i][j]==-1)
@@ -106,6 +129,24 @@ public class Puzzle {
 					System.out.print("|");
 			}
 		}
+	}
+	
+	public void played() {
+		String s="";
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1)
+					s+="b";
+				else
+					s+=tab[i][j];
+				if (j==n-1)
+					s+="\n";
+				else
+					s+="|";
+			}
+		}
+		listMove.add(s);
+		move++;
 	}
 	
 	public boolean isSuccess() {
@@ -257,6 +298,7 @@ public class Puzzle {
 		}
 		tab[x][y]=tab[x+1][y];//Haut
 		tab[x+1][y]=-1;
+		played();
 		return this;
 	}
 	public Puzzle Haut() {
@@ -272,6 +314,7 @@ public class Puzzle {
 		}
 		tab[x][y]=tab[x-1][y];
 		tab[x-1][y]=-1; //Bas
+		played();
 		return this;
 	}
 	public Puzzle Droite() {
@@ -287,6 +330,7 @@ public class Puzzle {
 		}
 		tab[x][y]=tab[x][y+1];
 		tab[x][y+1]=-1; //Droite
+		played();
 		return this;
 	}
 	public Puzzle Gauche() {
@@ -302,6 +346,7 @@ public class Puzzle {
 		}
 		tab[x][y]=tab[x][y-1];
 		tab[x][y-1]=-1;//Gauche
+		played();
 		return this;
 	}
 	@Override
