@@ -448,4 +448,13 @@ public class Puzzle {
 	public void setScore(int score) {
 		this.score = score;
 	}
+
+	public int getN() {
+		return n;
+	}
+
+	public void setN(int n) {
+		this.n = n;
+	}
+	
 }
