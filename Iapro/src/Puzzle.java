@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class Puzzle {
+public class Puzzle implements Comparable {
 	
 	
 
@@ -455,6 +455,17 @@ public class Puzzle {
 
 	public void setN(int n) {
 		this.n = n;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		Puzzle p = (Puzzle) o;
+		if(this.getScore()<p.getScore()) {
+			return 1;
+		}
+		else {
+			return -1;
+		}
 	}
 	
 }
