@@ -40,7 +40,7 @@ public class BFS {
 				if(b.equals("B")){
 					if(node.moveBas()) {
 						child.Bas();
-						child.Bas();
+					
 					}
 				}
 				if(b.equals("D")){

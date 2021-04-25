@@ -108,6 +108,11 @@ public class UCS {
 				return false;
 			Puzzle node = this.frontiere.pollFirst();
 			this.explored.add(node);
+			
+			  Iterator<Puzzle> itz = frontiere.iterator(); while(itz.hasNext()) {
+			  System.out.println(itz.next().getScore()); } System.out.println(
+			  "---------------------------------------------------------");
+			 
 			for (String b : ACTIONS) {
 				Puzzle child = new Puzzle(node);
 				if(b.equals("H")){
@@ -143,8 +148,7 @@ public class UCS {
 				}
 				Puzzle p = new Puzzle();
 				if(this.frontiere.contains(child)) {
-					TreeSet<Puzzle> tmp = (TreeSet<Puzzle>) frontiere.clone();
-					Iterator<Puzzle> it = tmp.iterator();
+					Iterator<Puzzle> it = frontiere.iterator();
 					while(it.hasNext()) {
 						p = it.next();
 						if(p.getTab().equals(child.getTab())) {

@@ -19,7 +19,7 @@ public class Puzzle implements Comparable {
 		this.tab =new int[n][n];
 		this.tabS =new int[n][n];
 		this.score =0;
-		init2();
+		init();
 	}
 	
 	public Puzzle() {
@@ -41,7 +41,7 @@ public class Puzzle implements Comparable {
 		for (int i =0; i<x.getListMove().size();i++) {
 			this.listMove.add(x.getListMove().get(i));
 		}
-		this.score=0;
+		this.score=x.score;
 	}
 	
 	
@@ -151,6 +151,25 @@ public class Puzzle implements Comparable {
 		move++;
 	}
 	
+	
+	@Override
+	public String toString() {
+		String s="";
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1)
+					s+="b";
+				else
+					s+=tab[i][j];
+				if (j==n-1)
+					s+="\n";
+				else
+					s+="|";
+			}
+		}
+		return s;
+	}
+
 	public boolean isSuccess() {
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
@@ -552,11 +571,11 @@ public class Puzzle implements Comparable {
 	@Override
 	public int compareTo(Object o) {
 		Puzzle p = (Puzzle) o;
-		if(this.getScore()<p.getScore()) {
-			return 1;
+		if(this.getScore()-p.getScore()!=0) {
+			return this.getScore()-p.getScore();
 		}
 		else {
-			return -1;
+			return this.toString().compareTo(p.toString());
 		}
 	}
 	
