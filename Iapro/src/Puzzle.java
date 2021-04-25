@@ -19,7 +19,7 @@ public class Puzzle implements Comparable {
 		this.tab =new int[n][n];
 		this.tabS =new int[n][n];
 		this.score =0;
-		init();
+		init2();
 	}
 	
 	public Puzzle() {
@@ -208,6 +208,8 @@ public class Puzzle implements Comparable {
 			
 	}
 	public boolean moveBas() {
+		if(this.isSuccess())
+			return false;
 		int x = -93,y = -93;
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
@@ -228,6 +230,8 @@ public class Puzzle implements Comparable {
 		
 	}
 	public boolean moveHaut() {
+		if(this.isSuccess())
+			return false;
 		int x = -93,y = -93;
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
@@ -249,6 +253,8 @@ public class Puzzle implements Comparable {
 		return false;
 	}
 	public boolean moveDroite() {
+		if(this.isSuccess())
+			return false;
 		int x = -93,y = -93;
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
@@ -267,6 +273,92 @@ public class Puzzle implements Comparable {
 		return false;
 	}
 	public boolean moveGauche() {
+		if(this.isSuccess())
+			return false;
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		boolean change = false;
+		if(!change &&y-1>=0) {
+			if(!change) {
+				change = true;
+				return true;
+			}
+		
+		}
+		return false;
+	}
+	public boolean moveBas2() {
+		
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		boolean change = false;
+		if(!change && x+1<n ) {
+			change = true;
+			return true;
+
+		}
+		return false;
+		
+	}
+	public boolean moveHaut2() {
+		
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		boolean change = false;
+		if(x-1>=0) {
+			if(!change ) {
+				change = true;
+				return true;
+			}
+			
+		}
+		return false;
+	}
+	public boolean moveDroite2() {
+		
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		boolean change = false;
+		if(!change && y+1< n ) {
+			change = true;
+			return true;
+		}
+		return false;
+	}
+	public boolean moveGauche2() {
+		
 		int x = -93,y = -93;
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
@@ -418,19 +510,19 @@ public class Puzzle implements Comparable {
 			for(String b :ACTIONS) {
 				switch(b) {
 				case "H": 
-					if(this.moveHaut()) {
+					if(this.moveHaut2()) {
 						this.Haut();
 					}
 					break;
-				case "B ": if(this.moveBas()) {
+				case "B ": if(this.moveBas2()) {
 					this.Bas();
 				}
 					break;
-				case "G":if(this.moveGauche()) {
+				case "G":if(this.moveGauche2()) {
 					this.Gauche();
 				}
 					break;
-				case "D": if(this.moveDroite()) {
+				case "D": if(this.moveDroite2()) {
 					this.Droite();
 				}
 					break;
