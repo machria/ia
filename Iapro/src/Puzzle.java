@@ -4,8 +4,8 @@ import java.util.Collections;
 
 public class Puzzle {
 	
-
 	
+
 	private int n;
 	private static final String[] ACTIONS = { "H", "B", "G", "D" };
 	private int[][] tab;
@@ -439,5 +439,13 @@ public class Puzzle {
 				}
 		}
 		}
+	}
+	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 }
