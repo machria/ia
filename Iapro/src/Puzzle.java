@@ -12,12 +12,13 @@ public class Puzzle {
 	private int[][] tabS;
 	private int move=0;
 	private ArrayList<String> listMove=new ArrayList<>();
+	private int score;
 	
 	public Puzzle(int n) {
 		this.n = n;
 		this.tab =new int[n][n];
 		this.tabS =new int[n][n];
-
+		this.score =0;
 		init();
 	}
 	
@@ -40,6 +41,7 @@ public class Puzzle {
 		for (int i =0; i<x.getListMove().size();i++) {
 			this.listMove.add(x.getListMove().get(i));
 		}
+		this.score=0;
 	}
 	
 	
