@@ -1,4 +1,3 @@
-
 public class DLS {
 	private Puzzle platform;
 	private static final String[] ACTIONS = { "H", "B", "G", "D" };
@@ -12,6 +11,14 @@ public class DLS {
 		
 	}
 	
+	public Puzzle getTruePlat() {
+		return truePlat;
+	}
+
+	public void setTruePlat(Puzzle truePlat) {
+		this.truePlat = truePlat;
+	}
+
 	public Puzzle DLS(Puzzle node, int limit) throws Exception {
 		if(node.isSuccess()) {
 			truePlat=node;
@@ -20,7 +27,6 @@ public class DLS {
 		else if(limit==0) {
 			return null;
 		}else {
-			System.out.println(node);
 			boolean cutoff=false;
 			for (String b : ACTIONS) {
 				Puzzle child = new Puzzle(node);
@@ -60,4 +66,3 @@ public class DLS {
 	}
 	}
 }
-

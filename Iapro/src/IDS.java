@@ -12,12 +12,11 @@ public class IDS {
 	
 	public int ids() throws Exception {
 		int c = 0;
-		while(dls.DLS(platform, c)==null) {
+		while(!dls.getTruePlat().isSuccess()) {
+			dls.DLS(platform, c);
+			//System.out.println(c);
 				c++;
 			
-		}
-		while(!dls.DLS(platform, c).isSuccess()) {
-			c++;
 		}
 		return c;
 	}
