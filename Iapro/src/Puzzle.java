@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Puzzle implements Comparable {
 	
@@ -13,6 +15,8 @@ public class Puzzle implements Comparable {
 	private int move=0;
 	private ArrayList<String> listMove=new ArrayList<>();
 	private int score;
+	private HashMap<Integer,String>  solMan = new HashMap<>();
+	private HashMap<Integer,String>  depMan = new HashMap<>();
 	
 	public Puzzle(int n) {
 		this.n = n;
@@ -577,6 +581,48 @@ public class Puzzle implements Comparable {
 		else {
 			return this.toString().compareTo(p.toString());
 		}
+	}
+	
+	public int hamming() {
+		int cpt = 0;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]!=tabS[i][j]) {
+					cpt++;
+				}
+			}
+		}
+		return cpt;
+	}
+	
+	public int manhattam() {
+		int manhattan = 0;
+		int cpt =0;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				String indice = i+"_"+j;
+				this.solMan.put(tabS[i][j], indice);
+				this.depMan.put(tab[i][j], indice);
+			}
+		}
+
+		for (Map.Entry depManEntry : this.depMan.entrySet()) {
+			cpt=0;
+			String indiceDepTmp = (String) depManEntry.getValue();
+			int key = (int) depManEntry.getKey();
+			String indiceSolTmp = this.solMan.get(key);
+			String[] indiceSol = indiceSolTmp.split("_");
+			String[] indiceDep = indiceDepTmp.split("_");
+			int indiceISol = Integer.parseInt(indiceSol[0]);
+			int indiceJSol = Integer.parseInt(indiceSol[1]);
+			int indiceIDep = Integer.parseInt(indiceSol[0]);
+			int indiceJDep = Integer.parseInt(indiceSol[1]);
+			int resITmp = indiceISol - indiceIDep;
+			int resJTmp = indiceJSol - indiceJDep;
+			cpt = Math.abs(resITmp) + Math.abs(resJTmp);
+			manhattan = manhattan +cpt;
+		}
+		return manhattan;
 	}
 	
 }
