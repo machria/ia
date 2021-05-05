@@ -615,8 +615,8 @@ public class Puzzle implements Comparable {
 			String[] indiceDep = indiceDepTmp.split("_");
 			int indiceISol = Integer.parseInt(indiceSol[0]);
 			int indiceJSol = Integer.parseInt(indiceSol[1]);
-			int indiceIDep = Integer.parseInt(indiceSol[0]);
-			int indiceJDep = Integer.parseInt(indiceSol[1]);
+			int indiceIDep = Integer.parseInt(indiceDep[0]);
+			int indiceJDep = Integer.parseInt(indiceDep[1]);
 			int resITmp = indiceISol - indiceIDep;
 			int resJTmp = indiceJSol - indiceJDep;
 			cpt = Math.abs(resITmp) + Math.abs(resJTmp);

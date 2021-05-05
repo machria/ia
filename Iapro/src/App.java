@@ -12,158 +12,63 @@ public class App {
 		 * //System.out.println(p.isSuccess()); } sc.close();
 		 */
 		
-		BFS bfs = new BFS(p);
-
-
-
-        
-
-
-
-        
-
-
-
-        
-
-
-
-        bfs.bfs();
-
-
-
-      
-
-
-
-      
-
-
-
-      
-
-
-
-        bfs.getTruePlat().print();
-
-
-
-      
-
-
-
-      
-
-
-
-      
-
-
-
-        System.out.println(bfs.getTruePlat().getListMove().size());
-
-
-
-      
-
-
-
-      
-
-
-
-      
-
-
-
-        for (int i =0; i<bfs.getTruePlat().getListMove().size();i++) {
-
-
-
-      
-
-
-
-      
-
-
-
-      
-
-
-
-        System.out.println(bfs.getTruePlat().getListMove().get(i));
-
-
-
-      
-
-
-
-      
-
-
-
-      
-
-
-
-        }
-        System.out.println("------------------------------");
+		//System.out.println(p.manhattam());
 		
-        UCS u = new UCS(p2);
-
-
-
-        u.ucs();
-
-
-
-        u.getEnd().print();
-
-
-
-        System.out.println(u.getEnd().getListMove().size());
-
-
-
-      
-
-
-
-        for (int i =0; i<u.getEnd().getListMove().size();i++) {
-
-
-
-          
-
-
-
-          
-
-
-
-          
-
-
-
-            System.out.println(u.getEnd().getListMove().get(i));
-
-
-
-          
-
-
-
-          
-
-
-
-          
-
-
-
-            }
+		
+		  Astar u = new Astar(p2);
+		  
+		  
+		  
+		  u.astar();
+		  
+		  
+		  
+		  u.getEnd().print();
+		  
+		  
+		  
+		  System.out.println(u.getEnd().getListMove().size());
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  for (int i =0; i<u.getEnd().getListMove().size();i++) {
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  System.out.println(u.getEnd().getListMove().get(i));
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  }
+		 
 		
 	}
 
