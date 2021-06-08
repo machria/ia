@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class Puzzle implements Comparable {
@@ -17,6 +18,7 @@ public class Puzzle implements Comparable {
 	private int score;
 	private HashMap<Integer,String>  solMan = new HashMap<>();
 	private HashMap<Integer,String>  depMan = new HashMap<>();
+	private String lastAction="";
 	
 	public Puzzle(int n) {
 		this.n = n;
@@ -24,6 +26,9 @@ public class Puzzle implements Comparable {
 		this.tabS =new int[n][n];
 		this.score =0;
 		init();
+		while(!realisable()) {
+			init();
+		}
 	}
 	
 	public Puzzle() {
@@ -83,7 +88,40 @@ public class Puzzle implements Comparable {
 	public void setTabS(int[][] tabS) {
 		this.tabS = tabS;
 	}
-
+	
+	public void setEnd() {
+		int valueMax = (n*n)-1;
+		ArrayList<Integer> a = new ArrayList<>();
+		tabS[0][0]=-1;
+		for(int i = 1;i<=valueMax;i++) {
+			a.add(i);
+			
+		}
+		a.add(-1);
+		int d=1;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(i+j!=0) {
+					tabS[i][j]=d;
+					d++;
+				}
+				
+			}
+		}
+			
+		
+		//Collections.shuffle(a);
+		int k = 0;
+			for (int i=0;i<n;i++) {
+				for(int j=0;j<n;j++) {
+						tab[i][j]=a.get(k);
+						k++;
+					
+						
+					
+				}
+			}
+	}
 
 	public void init() {
 		int valueMax = (n*n)-1;
@@ -416,6 +454,7 @@ public class Puzzle implements Comparable {
 		tab[x][y]=tab[x+1][y];//Haut
 		tab[x+1][y]=-1;
 		played();
+		lastAction="B";
 		return this;
 	}
 	public Puzzle Haut() {
@@ -432,6 +471,7 @@ public class Puzzle implements Comparable {
 		tab[x][y]=tab[x-1][y];
 		tab[x-1][y]=-1; //Bas
 		played();
+		lastAction="H";
 		return this;
 	}
 	public Puzzle Droite() {
@@ -448,6 +488,7 @@ public class Puzzle implements Comparable {
 		tab[x][y]=tab[x][y+1];
 		tab[x][y+1]=-1; //Droite
 		played();
+		lastAction="D";
 		return this;
 	}
 	public Puzzle Gauche() {
@@ -464,8 +505,18 @@ public class Puzzle implements Comparable {
 		tab[x][y]=tab[x][y-1];
 		tab[x][y-1]=-1;//Gauche
 		played();
+		lastAction="G";
 		return this;
 	}
+	
+	public String getLastAction() {
+		return lastAction;
+	}
+
+	public void setLastAction(String lastAction) {
+		this.lastAction = lastAction;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -554,6 +605,47 @@ public class Puzzle implements Comparable {
 				}
 		}
 		}
+	}
+	
+	public boolean realisable() {
+		LinkedList<Integer> l = new LinkedList<>();
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]!=-1)
+				l.add(tab[i][j]);
+				
+			}
+		}
+		int inversion=0;
+		for (int i = 0;i<l.size();i++) {
+			int nb=l.get(i);
+			for(int j=i+1;j<l.size();j++) {
+				if(nb>l.get(j)) {
+					inversion++;
+				}
+			}
+		}
+		return inversion%2==0;
+	}
+	public int inversion() {
+		LinkedList<Integer> l = new LinkedList<>();
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]!=-1)
+				l.add(tab[i][j]);
+				
+			}
+		}
+		int inversion=0;
+		for (int i = 0;i<l.size();i++) {
+			int nb=l.get(i);
+			for(int j=i+1;j<l.size();j++) {
+				if(nb>l.get(j)) {
+					inversion++;
+				}
+			}
+		}
+		return inversion;
 	}
 	
 	public int getScore() {

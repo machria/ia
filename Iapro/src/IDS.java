@@ -20,4 +20,8 @@ public class IDS {
 		}
 		return c;
 	}
+	
+	public Puzzle getEnd() {
+		return dls.getTruePlat();
+	}
 }

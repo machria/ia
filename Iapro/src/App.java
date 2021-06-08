@@ -6,6 +6,7 @@ public class App {
 		Puzzle p = new Puzzle(3);
 		Puzzle p2 = new Puzzle(p);
 		p.print();
+		System.out.println("Difficulté niveau : " + p.inversion());
 		/*
 		 * //System.out.println(p.isSuccess()); Scanner sc = new Scanner(System.in);
 		 * while(!p.isSuccess()) { p.move(sc.nextInt()); p.print();
@@ -23,7 +24,7 @@ public class App {
 		  
 		  
 		  
-		  u.getEnd().print();
+		  //u.getEnd().print();
 		  
 		  
 		  
@@ -68,8 +69,68 @@ public class App {
 		  
 		  
 		  }
+		  System.out.println("-------------------------------------");
+		  UCS u1 = new UCS(p);
+
+          u1.ucs();
+
+          //u1.getEnd().print();
+
+          System.out.println(u1.getEnd().getListMove().size());
+
+        
+
+          for (int i =0; i<u1.getEnd().getListMove().size();i++) {
+
+            
+
+            
+
+            
+
+              System.out.println(u1.getEnd().getListMove().get(i));
+
+            
+
+            
+
+            
+
+              }
 		 
 		
-	}
+	
+	System.out.println("-------------------------------------");
+	  BD uu1 = new BD(p);
+
+    uu1.bd();
+
+    //u1.getEnd().print();
+
+    System.out.println(uu1.getEnd().getListMove().size());
+
+  
+
+    for (int i =0; i<uu1.getEnd().getListMove().size();i++) {
+
+      
+
+      
+
+      
+
+        System.out.println(uu1.getEnd().getListMove().get(i));
+
+      
+
+      
+
+      
+
+        }
+	 
+	
+}
+	
 
 }

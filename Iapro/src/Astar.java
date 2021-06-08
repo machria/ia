@@ -119,25 +119,25 @@ public class Astar {
 				for (String b : ACTIONS) {
 					Puzzle child = new Puzzle(node);
 					if(b.equals("H")){
-						if(node.moveHaut()) {
+						if(node.moveHaut()&&node.getLastAction()!="B") {
 							child.setScore(this.Score(child, "H"));
 							child.Haut();
 						}
 					}
 					if(b.equals("B")){
-						if(node.moveBas()) {
+						if(node.moveBas()&&node.getLastAction()!="H") {
 							child.setScore(this.Score(child, "B"));
 							child.Bas();
 						}
 					}
 					if(b.equals("D")){
-						if(node.moveDroite()) {
+						if(node.moveDroite()&&node.getLastAction()!="G") {
 							child.setScore(this.Score(child, "D"));
 							child.Droite();
 						}
 					}
 					if(b.equals("G")){
-						if(node.moveGauche()) {
+						if(node.moveGauche()&&node.getLastAction()!="D") {
 							child.setScore(this.Score(child, "G"));
 							child.Gauche();
 						}
