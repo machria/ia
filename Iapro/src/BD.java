@@ -1,4 +1,6 @@
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -71,8 +73,12 @@ public class BD {
 							}
 							Plat2 = new Puzzle(p);
 							return true;
-						}else
-						return true;
+						}else {
+							Plat= new Puzzle(node);
+							return true;
+
+						}
+							
 					}
 					if (!frontierf.contains(child)&&!explored.contains(child)) {
 						frontierf.add(child);
@@ -129,8 +135,95 @@ public class BD {
 	}
 }
 
-	public Puzzle getEnd() {
-		return Plat;
+	public void getRes() {
+		if(Plat2!=null) {
+			System.out.println(this.Plat.getListMove().size()+this.Plat2.getListMove().size());
+
+			  
+
+		    for (int i =0; i<Plat.getListMove().size();i++) {
+
+		      
+
+		      
+
+		      
+
+		        System.out.println(Plat.getListMove().get(i));
+
+		      
+
+		      
+
+		      
+
+		        }
+		    
+		    //System.out.println(this.Plat2.getListMove().size());
+		    ArrayList<String> a = new ArrayList<>();
+		   //Collections.reverse(Plat2.getListMove());
+			  
+		    //Plat2.setListMove(Plat2.getListMove());
+		    
+		    for (int i =0; i<Plat2.getListMove().size();i++) {
+
+		      
+
+		      
+
+		      
+
+		        a.add(Plat2.getListMove().get(i));
+
+		      
+
+		      
+
+		      
+
+		        }
+		   // Collections.reverse(a);
+
+		    for (int i =0; i<a.size();i++) {
+
+			      
+
+			      
+
+			      
+
+		        System.out.println(a.get(i));
+
+		      
+
+		      
+
+		      
+
+		        }
+		}else {
+			System.out.println(this.Plat.getListMove().size());
+
+			  
+
+		    for (int i =0; i<Plat.getListMove().size();i++) {
+
+		      
+
+		      
+
+		      
+
+		        System.out.println(Plat.getListMove().get(i));
+
+		      
+
+		      
+
+		      
+
+		        }
+		}
 	}
 	
 	
