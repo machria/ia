@@ -67,7 +67,7 @@ public class BD {
 							Iterator<Puzzle> it = frontierb.iterator();
 							while(it.hasNext()) {
 								p = it.next();
-								if(p.getTab().equals(node.getTab())) {
+								if(p.printS().equals(node.printS())) {
 									break;
 								}
 							}
@@ -117,7 +117,7 @@ public class BD {
 						Iterator<Puzzle> it = frontierf.iterator();
 						while(it.hasNext()) {
 							p = it.next();
-							if(p.getTab().equals(node.getTab())) {
+							if(p.printS().equals(node.printS())) {
 								break;
 							}
 						}
@@ -182,7 +182,8 @@ public class BD {
 		      
 
 		        }
-		   // Collections.reverse(a);
+		    System.out.println("-----------------------");
+		    Collections.reverse(a);
 
 		    for (int i =0; i<a.size();i++) {
 

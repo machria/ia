@@ -174,6 +174,22 @@ public class Puzzle implements Comparable {
 			}
 		}
 	}
+	public String printS() {
+		String s="";
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1)
+					s=s+"b";
+				else
+					s=s+tab[i][j];
+				if (j==n-1)
+					s=s+"\n";
+				else
+					s=s+"|";
+			}
+		}
+		return s;
+	}
 	
 	public void played() {
 		String s="";
