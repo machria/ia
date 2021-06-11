@@ -18,10 +18,12 @@ public class BFS {
 	}
 
 	public boolean bfs() {
+		int compteur = 0;
 		if (this.platform.isSuccess())
 			return true;
 		this.frontier.add(this.truePlat);
 		while (true) {
+			compteur++;
 			if (this.frontier.isEmpty())
 				return false;
 			//System.out.println(this.frontier.size());
@@ -56,14 +58,16 @@ public class BFS {
 				if(!this.explored.contains(child) && !this.frontier.contains(child)) {
 					if(child.isSuccess()) {
 						this.truePlat = child;
+						System.out.println(compteur);
 						return true;
 					}
 					this.frontier.add(child);
 				}
 			}
 			
-
+			
 		}
+		
 	}
 
 	public Puzzle getPlatform() {

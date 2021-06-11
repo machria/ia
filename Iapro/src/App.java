@@ -14,104 +14,105 @@ public class App {
 		 */
 		
 		//System.out.println(p.manhattam());
-		
-		
-		  Astar u = new Astar(p2);
-		  
-		  
-		  
-		  u.astar();
-		  
-		  
-		  
-		  //u.getEnd().print();
-		  
-		  
-		  
-		  System.out.println(u.getEnd().getListMove().size());
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  for (int i =0; i<u.getEnd().getListMove().size();i++) {
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  System.out.println(u.getEnd().getListMove().get(i));
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  }
-		  System.out.println("-------------------------------------");
-		  UCS u1 = new UCS(p);
-
-          u1.ucs();
-
-          //u1.getEnd().print();
-
-          System.out.println(u1.getEnd().getListMove().size());
-
-        
-
-          for (int i =0; i<u1.getEnd().getListMove().size();i++) {
-
-            
-
-            
-
-            
-
-              System.out.println(u1.getEnd().getListMove().get(i));
-
-            
-
-            
-
-            
-
-              }
+		/*
+		 * 
+		 * Astar u = new Astar(p2);
+		 * 
+		 * 
+		 * 
+		 * u.astar();
+		 * 
+		 * 
+		 * 
+		 * //u.getEnd().print();
+		 * 
+		 * 
+		 * 
+		 * System.out.println(u.getEnd().getListMove().size());
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * for (int i =0; i<u.getEnd().getListMove().size();i++) {
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * System.out.println(u.getEnd().getListMove().get(i));
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * } System.out.println("-------------------------------------"); UCS u1 = new
+		 * UCS(p);
+		 * 
+		 * u1.ucs();
+		 * 
+		 * //u1.getEnd().print();
+		 * 
+		 * System.out.println(u1.getEnd().getListMove().size());
+		 * 
+		 * 
+		 * 
+		 * for (int i =0; i<u1.getEnd().getListMove().size();i++) {
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * System.out.println(u1.getEnd().getListMove().get(i));
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * }
+		 */
 		 
 		
 	
 	System.out.println("-------------------------------------");
-	  BD uu1 = new BD(p);
+	  
+	ILS x = new ILS(p);
 
-    uu1.bd();
+    x.ils();
 
     //u1.getEnd().print();
 
-    System.out.println(uu1.getEnd().getListMove().size());
+    System.out.println(x.getEnd().getListMove().size());
 
   
 
-    for (int i =0; i<uu1.getEnd().getListMove().size();i++) {
+    for (int i =0; i<x.getEnd().getListMove().size();i++) {
 
       
 
@@ -119,7 +120,7 @@ public class App {
 
       
 
-        System.out.println(uu1.getEnd().getListMove().get(i));
+        System.out.println(x.getEnd().getListMove().get(i));
 
       
 
@@ -128,9 +129,42 @@ public class App {
       
 
         }
-	 
+    System.out.println(x.getProfondeur());
+	
+    System.out.println("-------------------------------------");
+	  
+	BFS bfs = new BFS(p);
+
+    bfs.bfs();
+
+    //u1.getEnd().print();
+
+    System.out.println(bfs.getTruePlat().getListMove().size());
+
+  
+
+    for (int i =0; i<bfs.getTruePlat().getListMove().size();i++) {
+
+      
+
+      
+
+      
+
+        System.out.println(bfs.getTruePlat().getListMove().get(i));
+
+      
+
+      
+
+      
+
+        }
+    System.out.println(x.getProfondeur());
 	
 }
+}
+	
 	
 
-}
+
