@@ -130,9 +130,11 @@ public class GFS {
 			Puzzle node = this.frontiere.pollFirst();
 			this.explored.add(node);
 			
-			  Iterator<Puzzle> itz = frontiere.iterator(); while(itz.hasNext()) {
-			  System.out.println(itz.next().getScore()); } System.out.println(
-			  "---------------------------------------------------------");
+			/*
+			 * Iterator<Puzzle> itz = frontiere.iterator(); while(itz.hasNext()) {
+			 * System.out.println(itz.next().getScore()); } System.out.println(
+			 * "---------------------------------------------------------");
+			 */
 			 
 			for (String b : ACTIONS) {
 				Puzzle child = new Puzzle(node);

@@ -50,10 +50,23 @@ public class Puzzle implements Comparable {
 		for (int i =0; i<x.getListMove().size();i++) {
 			this.listMove.add(x.getListMove().get(i));
 		}
-		this.score=x.score;
+		this.score+=x.score;
 	}
 	
 	
+	public Puzzle(int size_enter, int[][] valeurs) {
+		this.n = size_enter;
+		this.tab =new int[n][n];
+		this.tabS =new int[n][n];
+		this.init();
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				tab[i][j]=valeurs[i][j];
+			}
+		}
+		
+	}
+
 	public int getMove() {
 		return move;
 	}
@@ -139,6 +152,7 @@ public class Puzzle implements Comparable {
 					tabS[i][j]=d;
 					d++;
 				}
+				
 				
 			}
 		}
