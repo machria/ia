@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -11,10 +13,30 @@ public class App {
 		 * loadGrille();
 		 */
 		
-		Puzzle p = new Puzzle(5);
-		Puzzle p2 = new Puzzle(p);
-		p.print();
-		System.out.println("Difficulté niveau : " + p.inversion());
+		Experimentation a = new Experimentation(5, 3);
+		a.init();
+		ArrayList<Long> b = new ArrayList<>(); 
+		ArrayList<Integer> c = new ArrayList<>(); 
+
+		for(int i = 0;i<a.getListPuzzle().size();i++) {
+			BFS bfs = new BFS(a.getListPuzzle().get(i));
+			long start_time = System.currentTimeMillis();
+			bfs.solve();
+			long duration = System.currentTimeMillis() - start_time;
+			b.add(duration);
+			c.add(bfs.getExplored().size()+bfs.getFrontier().size());
+		}
+		
+		for(int i = 0;i<b.size();i++) {
+			System.out.println(b.get(i));
+		}
+		 Integer max = Collections.max(c);
+		 System.out.println("Max = "+max);
+		 int count=0;
+		 for(int i = 0;i<c.size();i++) {
+				count=count+c.get(i);
+		}
+		 System.out.println("Moyenne : "+count/c.size());
 		/*
 		 * //System.out.println(p.isSuccess()); Scanner sc = new Scanner(System.in);
 		 * while(!p.isSuccess()) { p.move(sc.nextInt()); p.print();
@@ -117,40 +139,40 @@ public class App {
 			 */
 	
 			
-			  System.out.println("-------------------------------------");
-			  
-			  
-			  
-			  GFS xx = new GFS(p);
-			  long start_time = System.currentTimeMillis();
-			  xx.gfs();
-			  long duration = System.currentTimeMillis() - start_time;
-			  System.out.println("Fin A*, durée : " + String.format("%d min, %d sec",
-			              TimeUnit.MILLISECONDS.toMinutes(duration), TimeUnit.MILLISECONDS.toSeconds(duration)
-			              - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))));
-			  //u1.getEnd().print();
-			  
-			  System.out.println(xx.getEnd().getListMove().size());
-			  System.out.println(xx.getExplored().size()+xx.getFrontiere().size());
-			  System.out.println(xx.getEnd().getScore());
-			  
-			  
-			  
-			  for (int i =0; i<xx.getEnd().getListMove().size();i++) {
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  System.out.println(xx.getEnd().getListMove().get(i));
-			  
-			  
-			  
-			  }
-			  
-			 
+			/*
+			 * System.out.println("-------------------------------------");
+			 * 
+			 * 
+			 * 
+			 * GFS xx = new GFS(p); long start_time = System.currentTimeMillis(); xx.gfs();
+			 * long duration = System.currentTimeMillis() - start_time;
+			 * System.out.println("Fin A*, durée : " + String.format("%d min, %d sec",
+			 * TimeUnit.MILLISECONDS.toMinutes(duration),
+			 * TimeUnit.MILLISECONDS.toSeconds(duration) -
+			 * TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))));
+			 * //u1.getEnd().print();
+			 * 
+			 * System.out.println(xx.getEnd().getListMove().size());
+			 * System.out.println(xx.getExplored().size()+xx.getFrontiere().size());
+			 * System.out.println(xx.getEnd().getScore());
+			 * 
+			 * 
+			 * 
+			 * for (int i =0; i<xx.getEnd().getListMove().size();i++) {
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * System.out.println(xx.getEnd().getListMove().get(i));
+			 * 
+			 * 
+			 * 
+			 * }
+			 * 
+			 */
 
     
 	

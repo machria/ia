@@ -19,4 +19,14 @@ public class Experimentation {
 		}
 	}
 
+	public ArrayList<Puzzle> getListPuzzle() {
+		return ListPuzzle;
+	}
+
+	public void setListPuzzle(ArrayList<Puzzle> listPuzzle) {
+		ListPuzzle = listPuzzle;
+	}
+	
+	
+
 }

@@ -105,5 +105,17 @@ public class BFS {
 	public static String[] getActions() {
 		return ACTIONS;
 	}
-
+	public void solve() {
+		boolean check = bfs();
+		if(check) {
+			System.out.println(this.getTruePlat().getListMove().size());
+			System.out.println(this.getFrontier().size()+this.getExplored().size());
+			for (int i =0; i<this.getTruePlat().getListMove().size();i++) {
+				System.out.println(this.getTruePlat().getListMove().get(i));
+			}
+		}else {
+			System.out.println(this.getFrontier().size()+this.getExplored().size());
+		}
+		
+	}
 }
