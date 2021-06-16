@@ -11,7 +11,7 @@ public class App {
 		 * loadGrille();
 		 */
 		
-		Puzzle p = new Puzzle(4);
+		Puzzle p = new Puzzle(5);
 		Puzzle p2 = new Puzzle(p);
 		p.print();
 		System.out.println("Difficulté niveau : " + p.inversion());

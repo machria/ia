@@ -50,7 +50,7 @@ public class Puzzle implements Comparable {
 		for (int i =0; i<x.getListMove().size();i++) {
 			this.listMove.add(x.getListMove().get(i));
 		}
-		this.score+=x.score;
+		this.score=x.score;
 	}
 	
 	
@@ -655,7 +655,18 @@ public class Puzzle implements Comparable {
 				}
 			}
 		}
-		return inversion%2==0;
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		
+		return inversion%2==0 && ((x%2==0 && n%2==0)||n%2==1);
 	}
 	public int inversion() {
 		LinkedList<Integer> l = new LinkedList<>();
