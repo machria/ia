@@ -13,7 +13,7 @@ public class IDS {
 	public int ids() throws Exception {
 		int c = 0;
 		while(!dls.getTruePlat().isSuccess()) {
-			dls.DLS(platform, c);
+			dls.dls(platform, c);
 			//System.out.println(c);
 				c++;
 			

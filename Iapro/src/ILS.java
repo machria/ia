@@ -135,4 +135,19 @@ public class ILS {
 			}
 		}
 	}
+	
+	public void solve() {
+		boolean check = ils();
+		if(check) {
+			System.out.println(this.getEnd().getListMove().size());
+			System.out.println(this.getFrontiere().size()+this.getExplore().size());
+			for (int i =0; i<this.getEnd().getListMove().size();i++) {
+				System.out.println(this.getEnd().getListMove().get(i));
+			}
+			System.out.println(this.getEnd().getScore());
+		}else {
+			System.out.println(this.getFrontiere().size()+this.getExplore().size());
+		}
+		
+	}
 }

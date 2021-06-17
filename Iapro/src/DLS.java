@@ -19,7 +19,7 @@ public class DLS {
 		this.truePlat = truePlat;
 	}
 
-	public Puzzle DLS(Puzzle node, int limit) throws Exception {
+	public Puzzle dls(Puzzle node, int limit) throws Exception {
 		if(node.isSuccess()) {
 			truePlat=node;
 			return node;
@@ -64,5 +64,11 @@ public class DLS {
 				else
 					throw new Exception("Faillure");
 	}
+	}
+	public void solve(int limite, Puzzle p) {
+		Puzzle check = dls(p,limite);
+		if(check.isSuccess()) {
+		}
+		
 	}
 }
