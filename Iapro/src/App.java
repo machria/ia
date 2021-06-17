@@ -13,7 +13,7 @@ public class App {
 		 * loadGrille();
 		 */
 		
-		Experimentation a = new Experimentation(5, 3);
+		Experimentation a = new Experimentation(1, 3);
 		a.init();
 		ArrayList<Long> b = new ArrayList<>(); 
 		ArrayList<Integer> c = new ArrayList<>(); 

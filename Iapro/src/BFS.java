@@ -113,6 +113,7 @@ public class BFS {
 			for (int i =0; i<this.getTruePlat().getListMove().size();i++) {
 				System.out.println(this.getTruePlat().getListMove().get(i));
 			}
+			System.out.println(this.getTruePlat().getScore());
 		}else {
 			System.out.println(this.getFrontier().size()+this.getExplored().size());
 		}

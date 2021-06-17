@@ -481,10 +481,17 @@ public class Puzzle implements Comparable {
 					
 			}
 		}
+		if(this.getTab()[x+1][y]%2==0) {
+			this.setScore( this.getScore()+1);
+		}
+		else {
+			this.setScore( this.getScore()+2);
+		}
 		tab[x][y]=tab[x+1][y];//Haut
 		tab[x+1][y]=-1;
 		played();
 		lastAction="B";
+		
 		return this;
 	}
 	public Puzzle Haut() {
@@ -497,6 +504,12 @@ public class Puzzle implements Comparable {
 				}
 					
 			}
+		}
+		if(this.getTab()[x-1][y]%2==0) {
+			this.setScore( this.getScore()+1);
+		}
+		else {
+			this.setScore( this.getScore()+2);
 		}
 		tab[x][y]=tab[x-1][y];
 		tab[x-1][y]=-1; //Bas
@@ -515,6 +528,12 @@ public class Puzzle implements Comparable {
 					
 			}
 		}
+		if(this.getTab()[x][y+1]%2==0) {
+			this.setScore( this.getScore()+1);
+		}
+		else {
+			this.setScore( this.getScore()+2);
+		}
 		tab[x][y]=tab[x][y+1];
 		tab[x][y+1]=-1; //Droite
 		played();
@@ -531,6 +550,12 @@ public class Puzzle implements Comparable {
 				}
 					
 			}
+		}
+		if(this.getTab()[x][y-1]%2==0) {
+			this.setScore( this.getScore()+1);
+		}
+		else {
+			this.setScore( this.getScore()+2);
 		}
 		tab[x][y]=tab[x][y-1];
 		tab[x][y-1]=-1;//Gauche
