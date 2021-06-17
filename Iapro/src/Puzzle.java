@@ -720,7 +720,7 @@ public class Puzzle implements Comparable {
 		//this.DroiteC();
 		//this.DroiteC();
 		this.BasC();
-		this.BasC();
+		//this.BasC();
 	}
 	
 	public boolean realisable() {

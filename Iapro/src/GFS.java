@@ -11,8 +11,8 @@ public class GFS {
 	private Puzzle end;
 	
 	public GFS(Puzzle racine) {
-		this.racine = racine;
-		this.end = racine;
+		this.racine = new Puzzle(racine);
+		this.end = new Puzzle(racine);
 		this.explored = new HashSet<Puzzle>();
 		this.frontiere = new TreeSet<Puzzle>();
 	}
@@ -124,9 +124,11 @@ public class GFS {
 		if (this.racine.isSuccess())
 			return true;
 		this.frontiere.add(this.end);
+		System.out.println(this.frontiere+"------------------------\n");
 		while (true) {
 			if (this.frontiere.isEmpty())
 				return false;
+			System.out.println(this.frontiere+"------------------------\n");
 			Puzzle node = this.frontiere.pollFirst();
 			this.explored.add(node);
 			
@@ -135,31 +137,32 @@ public class GFS {
 			 * System.out.println(itz.next().getScore()); } System.out.println(
 			 * "---------------------------------------------------------");
 			 */
-			 
+			
 			for (String b : ACTIONS) {
 				Puzzle child = new Puzzle(node);
 				if(b.equals("H")){
 					if(node.moveHaut()) {
 						child.setScore(this.Score2(child, "H"));
-						child.Haut();
+						child = child.Haut();
+						System.out.println("je suis dans haut");
 					}
 				}
-				if(b.equals("B")){
+				else if(b.equals("B")){
 					if(node.moveBas()) {
 						child.setScore(this.Score2(child, "B"));
-						child.Bas();
+						child = child.Bas();
 					}
 				}
-				if(b.equals("D")){
+				else if(b.equals("D")){
 					if(node.moveDroite()) {
 						child.setScore(this.Score2(child, "D"));
-						child.Droite();
+						child=child.Droite();
 					}
 				}
-				if(b.equals("G")){
+				else{
 					if(node.moveGauche()) {
 						child.setScore(this.Score2(child, "G"));
-						child.Gauche();
+						child=child.Gauche();
 					}
 				}
 				if(!this.explored.contains(child) && !this.frontiere.contains(child)) {
@@ -168,8 +171,10 @@ public class GFS {
 						return true;
 					}
 					this.frontiere.add(child);
+					System.out.println("ajout");
 				}
 			}
+			
 		}
 	}
 	public boolean solve() {
