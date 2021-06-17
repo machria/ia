@@ -25,9 +25,9 @@ public class Puzzle implements Comparable {
 		this.tab =new int[n][n];
 		this.tabS =new int[n][n];
 		this.score =0;
-		init();
+		init2();
 		while(!realisable()) {
-			init();
+			init2();
 		}
 	}
 	
@@ -311,9 +311,9 @@ public class Puzzle implements Comparable {
 					
 			}
 		}
-		boolean change = false;
-		if(!change && x+1<n ) {
-			change = true;
+		//boolean change = false;
+		if(x+1<n ) {
+			//change = true;
 			return true;
 
 		}
@@ -571,6 +571,80 @@ public class Puzzle implements Comparable {
 	public void setLastAction(String lastAction) {
 		this.lastAction = lastAction;
 	}
+	
+	public Puzzle BasC() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		
+		tab[x][y]=tab[x+1][y];//Haut
+		tab[x+1][y]=-1;
+		played();
+		lastAction="B";
+		
+		return this;
+	}
+	public Puzzle HautC() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		
+		tab[x][y]=tab[x-1][y];
+		tab[x-1][y]=-1; //Bas
+		played();
+		lastAction="H";
+		return this;
+	}
+	public Puzzle DroiteC() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		
+		tab[x][y]=tab[x][y+1];
+		tab[x][y+1]=-1; //Droite
+		played();
+		lastAction="D";
+		return this;
+	}
+	public Puzzle GaucheC() {
+		int x = -93,y = -93;
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tab[i][j]==-1) {
+					x=i;
+					y=j;
+				}
+					
+			}
+		}
+		
+		tab[x][y]=tab[x][y-1];
+		tab[x][y-1]=-1;//Gauche
+		played();
+		lastAction="G";
+		return this;
+	}
 
 	@Override
 	public int hashCode() {
@@ -635,31 +709,18 @@ public class Puzzle implements Comparable {
 		}
 		
 		
-		for (int i = 0 ; i < 100; i++) {
-			for(String b :ACTIONS) {
-				switch(b) {
-				case "H": 
-					if(this.moveHaut2()) {
-						this.Haut();
-					}
-					break;
-				case "B ": if(this.moveBas2()) {
-					this.Bas();
-				}
-					break;
-				case "G":if(this.moveGauche2()) {
-					this.Gauche();
-				}
-					break;
-				case "D": if(this.moveDroite2()) {
-					this.Droite();
-				}
-					break;
-				default:
-					break;
-				}
-		}
-		}
+		/*
+		 * for (int i = 0 ; i < 100; i++) { for(String b :ACTIONS) { switch(b) { case
+		 * "H": if(this.moveHaut2()) { this.Haut(); } break; case "B ":
+		 * if(this.moveBas2()) { this.Bas(); } break; case "G":if(this.moveGauche2()) {
+		 * this.Gauche(); } break; case "D": if(this.moveDroite2()) { this.Droite(); }
+		 * break; default: break; } } }
+		 */
+		//this.DroiteC();
+		//this.DroiteC();
+		//this.DroiteC();
+		this.BasC();
+		this.BasC();
 	}
 	
 	public boolean realisable() {

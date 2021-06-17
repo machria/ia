@@ -135,7 +135,7 @@ public class BD {
 	}
 }
 
-	public void getRes() {
+	public void solve() {
 		if(Plat2!=null) {
 			System.out.println(this.Plat.getListMove().size()+this.Plat2.getListMove().size());
 

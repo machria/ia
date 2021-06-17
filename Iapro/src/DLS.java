@@ -50,7 +50,7 @@ public class DLS {
 						child.Gauche();
 					}
 				}
-				Puzzle result  = DLS(child,limit-1);
+				Puzzle result  = dls(child,limit-1);
 				if (result==null)
 						cutoff=true;
 				else {
@@ -65,9 +65,12 @@ public class DLS {
 					throw new Exception("Faillure");
 	}
 	}
-	public void solve(int limite, Puzzle p) {
+	public void solve(int limite, Puzzle p) throws Exception {
 		Puzzle check = dls(p,limite);
 		if(check.isSuccess()) {
+			
+		}else {
+			
 		}
 		
 	}
