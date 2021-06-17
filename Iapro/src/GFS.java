@@ -124,11 +124,9 @@ public class GFS {
 		if (this.racine.isSuccess())
 			return true;
 		this.frontiere.add(this.end);
-		System.out.println(this.frontiere+"------------------------\n");
 		while (true) {
 			if (this.frontiere.isEmpty())
 				return false;
-			System.out.println(this.frontiere+"------------------------\n");
 			Puzzle node = this.frontiere.pollFirst();
 			this.explored.add(node);
 			
@@ -144,7 +142,6 @@ public class GFS {
 					if(node.moveHaut()) {
 						child.setScore(this.Score2(child, "H"));
 						child = child.Haut();
-						System.out.println("je suis dans haut");
 					}
 				}
 				else if(b.equals("B")){
@@ -171,7 +168,6 @@ public class GFS {
 						return true;
 					}
 					this.frontiere.add(child);
-					System.out.println("ajout");
 				}
 			}
 			

@@ -26,9 +26,13 @@ public class Puzzle implements Comparable {
 		this.tabS =new int[n][n];
 		this.score =0;
 		init2();
-		while(!realisable()) {
-			init2();
+		print();
+		System.out.println(this.inversion());
+		
+		while(!realisable()) { 
+			init2(); 
 		}
+		 
 	}
 	
 	public Puzzle() {
@@ -64,7 +68,8 @@ public class Puzzle implements Comparable {
 				tab[i][j]=valeurs[i][j];
 			}
 		}
-		
+		this.print();
+		System.out.println(this.inversion());
 	}
 
 	public int getMove() {
@@ -751,16 +756,19 @@ public class Puzzle implements Comparable {
 					
 			}
 		}
-		
-		return inversion%2==0 && ((x%2==0 && n%2==0)||n%2==1);
+		if(n%2==0&&(inversion+x)%2==0)
+			return true;
+		else if(n%2==1&&inversion%2==0)
+			return true;
+		return false;
 	}
 	public int inversion() {
 		LinkedList<Integer> l = new LinkedList<>();
 		for (int i=0;i<n;i++) {
 			for(int j=0;j<n;j++) {
-				if(tab[i][j]!=-1)
-				l.add(tab[i][j]);
-				
+				if(tab[i][j]!=-1) {
+					l.add(tab[i][j]);
+				}
 			}
 		}
 		int inversion=0;

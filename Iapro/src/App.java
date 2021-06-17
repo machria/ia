@@ -8,24 +8,26 @@ import java.util.concurrent.TimeUnit;
 public class App {
 	
 	public static void main(String[] args) throws Exception {
-		/*
-		 * Puzzle p = loadGrille(); boolean check = p.realisable(); while(!check) p =
-		 * loadGrille();
-		 */
 		
-		Experimentation a = new Experimentation(1, 6);
-		a.init();
+		  Puzzle p = loadGrille(); 
+		  boolean check = p.realisable(); 
+		  while(!check) p =loadGrille();
+		 
+		
+		/*
+		 * Experimentation a = new Experimentation(1, 3); a.init();
+		 */
 		ArrayList<Long> b = new ArrayList<>(); 
 		ArrayList<Integer> c = new ArrayList<>(); 
 
-		for(int i = 0;i<a.getListPuzzle().size();i++) {
-			GFS gfs = new GFS(a.getListPuzzle().get(i));
+		//for(int i = 0;i<a.getListPuzzle().size();i++) {
+			GFS gfs = new GFS(p);
 			long start_time = System.currentTimeMillis();
 			gfs.solve();
 			long duration = System.currentTimeMillis() - start_time;
 			b.add(duration);
 			c.add(gfs.getExplored().size()+gfs.getFrontiere().size());
-		}
+		//}
 		
 		for(int i = 0;i<b.size();i++) {
 			System.out.println(b.get(i));
