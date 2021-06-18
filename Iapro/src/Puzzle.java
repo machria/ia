@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Random;
 
 public class Puzzle implements Comparable {
 	
@@ -176,6 +177,39 @@ public class Puzzle implements Comparable {
 			}
 		
 		
+	}
+	
+	public void initialisation() {
+		ArrayList<Integer> valeur = new ArrayList<Integer>();
+		ArrayList<Integer> valeurTmp = new ArrayList<Integer>();
+		boolean realisable = false;
+		int nombreAlea;
+		while(realisable==false) {
+			valeur.add(-1);
+			for(int i = 1;i<this.n*this.n;i++) {
+				valeur.add(i);
+			}
+			while(!valeur.isEmpty()) {
+				nombreAlea = (int)(Math.random()*valeur.size()-1);
+				valeurTmp.add(valeur.get(nombreAlea));
+				valeur.remove(nombreAlea);
+			}
+			int index=0;
+			for (int i=0;i<n;i++) {
+				for(int j=0;j<n;j++) {
+					tab[i][j]=valeurTmp.get(index);
+					index++;
+				}
+			}
+			if(this.realisable()) {
+				System.out.println("Voici l'ordre des valeurs du puzzle :\n");
+				System.out.println(valeurTmp+"\n");
+				System.out.println("Voici le puzzle initialisé :\n");
+				this.print();
+				realisable=true;
+			}
+			valeurTmp.clear();
+		}
 	}
 	
 	public void print() {

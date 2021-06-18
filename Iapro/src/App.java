@@ -9,9 +9,9 @@ public class App {
 	
 	public static void main(String[] args) throws Exception {
 		
-		  Puzzle p = loadGrille(); 
-		  boolean check = p.realisable(); 
-		  while(!check) p =loadGrille();
+		  //Puzzle p = loadGrille(); 
+		  //boolean check = p.realisable(); 
+		  //while(!check) p =loadGrille();
 		 
 		
 		/*
@@ -19,6 +19,8 @@ public class App {
 		 */
 		ArrayList<Long> b = new ArrayList<>(); 
 		ArrayList<Integer> c = new ArrayList<>(); 
+		Puzzle p = new Puzzle(6);
+		p.initialisation();
 
 		//for(int i = 0;i<a.getListPuzzle().size();i++) {
 			GFS gfs = new GFS(p);
