@@ -9,12 +9,30 @@ public class GFS {
 	private static final String[] ACTIONS = { "H", "B", "G", "D" };
 	private Set<Puzzle> explored;
 	private Puzzle end;
+	private int compTemp=0;
+	private int compMem=0;
 	
 	public GFS(Puzzle racine) {
 		this.racine = new Puzzle(racine);
 		this.end = new Puzzle(racine);
 		this.explored = new HashSet<Puzzle>();
 		this.frontiere = new TreeSet<Puzzle>();
+	}
+	
+	public int getCompTemp() {
+		return compTemp;
+	}
+
+	public void setCompTemp(int compTemp) {
+		this.compTemp = compTemp;
+	}
+
+	public int getCompMem() {
+		return compMem;
+	}
+
+	public void setCompMem(int compMem) {
+		this.compMem = compMem;
 	}
 	
 	public int Score(Puzzle puzzle, String action) {
@@ -128,6 +146,7 @@ public class GFS {
 			if (this.frontiere.isEmpty())
 				return false;
 			Puzzle node = this.frontiere.pollFirst();
+			compTemp++;
 			this.explored.add(node);
 			
 			/*
@@ -138,6 +157,7 @@ public class GFS {
 			
 			for (String b : ACTIONS) {
 				Puzzle child = new Puzzle(node);
+				compTemp++;
 				if(b.equals("H")){
 					if(node.moveHaut()) {
 						child.setScore(this.Score2(child, "H"));
@@ -175,6 +195,7 @@ public class GFS {
 	}
 	public boolean solve() {
 		boolean check = gfs();
+		compMem=this.getFrontiere().size()+this.getExplored().size();
 		if(check) {
 			System.out.println(this.getEnd().getListMove().size());
 			System.out.println(this.getFrontiere().size()+this.getExplored().size());

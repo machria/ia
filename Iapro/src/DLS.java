@@ -3,12 +3,29 @@ public class DLS {
 	private static final String[] ACTIONS = { "H", "B", "G", "D" };
 	private Puzzle truePlat;
 	private Puzzle node;
+	private int compTemp=0;
+	private int compMem=0;
 	
 	public DLS(Puzzle platform) {
 		this.platform = platform;
 		this.truePlat = platform;
 		this.node=platform;
 		
+	}
+	public int getCompTemp() {
+		return compTemp;
+	}
+
+	public void setCompTemp(int compTemp) {
+		this.compTemp = compTemp;
+	}
+
+	public int getCompMem() {
+		return compMem;
+	}
+
+	public void setCompMem(int compMem) {
+		this.compMem = compMem;
 	}
 	
 	public Puzzle getTruePlat() {
@@ -30,6 +47,7 @@ public class DLS {
 			boolean cutoff=false;
 			for (String b : ACTIONS) {
 				Puzzle child = new Puzzle(node);
+				compTemp++;
 				if(b.equals("H")){
 					if(node.moveHaut()) {
 						child.Haut();
@@ -51,6 +69,8 @@ public class DLS {
 					}
 				}
 				Puzzle result  = dls(child,limit-1);
+				compMem++;
+				compTemp++;
 				if (result==null)
 						cutoff=true;
 				else {
@@ -65,12 +85,12 @@ public class DLS {
 					throw new Exception("Faillure");
 	}
 	}
-	public void solve(int limite, Puzzle p) throws Exception {
+	public boolean solve(int limite, Puzzle p) throws Exception {
 		Puzzle check = dls(p,limite);
 		if(check.isSuccess()) {
-			
+			return true;
 		}else {
-			
+			return false;
 		}
 		
 	}

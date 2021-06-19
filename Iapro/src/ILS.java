@@ -13,6 +13,8 @@ public class ILS {
 	private Set<Puzzle> explore;
 	private static final String[] ACTIONS = { "H", "B", "G", "D" };
 	private Puzzle solution;
+	private int compTemp=0;
+	private int compMem=0;
 	
 	public ILS(Puzzle racine) {
 		this.racine =racine;
@@ -75,6 +77,7 @@ public class ILS {
 		if (this.racine.isSuccess())
 			return true;
 		this.frontiere.add(this.racine);
+		compTemp++;
 		while(true) {
 			if (this.frontiere.isEmpty()) {
 				return false;
@@ -83,8 +86,10 @@ public class ILS {
 			this.profondeur = this.profondeur+1;
 			for (int i = 0 ; i<this.frontiere.size();i++) {
 				Puzzle b = this.frontiere.get(0);
+				compTemp++;
 				for (String a : ACTIONS) {
 					Puzzle child = new Puzzle(b);
+					compTemp++;
 					if(a.equals("H")){
 						if(b.moveHaut()&&b.getLastAction()!="B") {
 							child.Haut();
@@ -135,9 +140,25 @@ public class ILS {
 			}
 		}
 	}
+	public int getCompTemp() {
+		return compTemp;
+	}
+
+	public void setCompTemp(int compTemp) {
+		this.compTemp = compTemp;
+	}
+
+	public int getCompMem() {
+		return compMem;
+	}
+
+	public void setCompMem(int compMem) {
+		this.compMem = compMem;
+	}
 	
 	public void solve() {
 		boolean check = ils();
+		compMem=this.explore.size()+this.frontiere.size()+this.frontiereTmp.size();
 		if(check) {
 			System.out.println(this.getEnd().getListMove().size());
 			System.out.println(this.getFrontiere().size()+this.getExplore().size());

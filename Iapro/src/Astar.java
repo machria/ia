@@ -11,6 +11,8 @@ public class Astar {
 		private static final String[] ACTIONS = { "H", "B", "G", "D" };
 		private Set<Puzzle> explored;
 		private Puzzle end;
+		private int compTemp=0;
+		private int compMem=0;
 		
 		public Astar(Puzzle racine) {
 			this.racine = racine;
@@ -108,6 +110,7 @@ public class Astar {
 				if (this.frontiere.isEmpty())
 					return false;
 				Puzzle node = this.frontiere.pollFirst();
+				compTemp++;
 				this.explored.add(node);
 				
 				/*
@@ -118,6 +121,7 @@ public class Astar {
 				 
 				for (String b : ACTIONS) {
 					Puzzle child = new Puzzle(node);
+					compTemp++;
 					if(b.equals("H")){
 						if(node.moveHaut()&&node.getLastAction()!="B") {
 							child.setScore(this.Score(child, "H"));
@@ -166,9 +170,28 @@ public class Astar {
 				}
 			}
 		}
+		
+
+	public int getCompTemp() {
+			return compTemp;
+		}
+
+		public void setCompTemp(int compTemp) {
+			this.compTemp = compTemp;
+		}
+
+		public int getCompMem() {
+			return compMem;
+		}
+
+		public void setCompMem(int compMem) {
+			this.compMem = compMem;
+		}
 
 	public void solve() {
 			boolean check = astar();
+			compMem=this.frontiere.size()+this.getExplored().size();
+
 			if(check) {
 				System.out.println(this.getEnd().getListMove().size());
 				System.out.println(this.getFrontiere().size()+this.getExplored().size());

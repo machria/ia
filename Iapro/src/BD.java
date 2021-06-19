@@ -14,6 +14,8 @@ public class BD {
 	private Set<Puzzle> explored;
 	private Puzzle Plat;
 	private Puzzle Plat2;
+	private int compTemp=0;
+	private int compMem=0;
 
 	public BD(Puzzle platform) {
 		this.platform = platform;
@@ -22,6 +24,21 @@ public class BD {
 		this.frontierf = new ArrayDeque<Puzzle>();
 		this.frontierb = new ArrayDeque<Puzzle>();
 		this.explored = new HashSet<Puzzle>();
+	}
+	public int getCompTemp() {
+		return compTemp;
+	}
+
+	public void setCompTemp(int compTemp) {
+		this.compTemp = compTemp;
+	}
+
+	public int getCompMem() {
+		return compMem;
+	}
+
+	public void setCompMem(int compMem) {
+		this.compMem = compMem;
 	}
 	public boolean bd() {
 		if (this.platform.isSuccess())
@@ -35,9 +52,11 @@ public class BD {
 				return false;
 			if(!frontierf.isEmpty()) {
 				node = frontierf.pop();
+				compTemp++;
 				explored.add(node);
 				for (String b : ACTIONS) {
 					Puzzle child = new Puzzle(node);
+					compTemp++;
 					if(b.equals("H")){
 						if(node.moveHaut2()) {
 							child.Haut();
@@ -62,6 +81,8 @@ public class BD {
 					if(node.isSuccess()|| frontierb.contains(node)) {
 						if(frontierb.contains(node)) {
 							Plat= new Puzzle(node);
+							compTemp++;
+
 							Puzzle p = null;
 
 							Iterator<Puzzle> it = frontierb.iterator();
@@ -86,9 +107,11 @@ public class BD {
 			}}
 			if(!frontierb.isEmpty()) {
 				node = frontierb.pop();
+				compTemp++;
 				explored.add(node);
 				for (String b : ACTIONS) {
 					Puzzle child = new Puzzle(node);
+					compTemp++;
 					if(b.equals("H")){
 						if(node.moveHaut2()) {
 							child.Haut();
@@ -112,6 +135,8 @@ public class BD {
 					}
 					if(frontierf.contains(node)) {
 						Plat= new Puzzle(node);
+						compTemp++;
+
 						Puzzle p = null;
 
 						Iterator<Puzzle> it = frontierf.iterator();
@@ -122,6 +147,7 @@ public class BD {
 							}
 						}
 						Plat2 = new Puzzle(p);
+						compTemp++;
 						return true;
 					}
 					if (!frontierb.contains(child)&&!explored.contains(child)) {
@@ -137,6 +163,8 @@ public class BD {
 
 	public boolean solve() {
 		boolean check = bd();
+		
+		compMem= this.frontierb.size()+this.frontierf.size()+this.explored.size();
 		if (check) {
 			if(Plat2!=null) {
 				System.out.println(this.Plat.getListMove().size()+this.Plat2.getListMove().size());

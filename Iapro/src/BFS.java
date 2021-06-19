@@ -9,6 +9,8 @@ public class BFS {
 	private static final String[] ACTIONS = { "H", "B", "G", "D" };
 	private Set<Puzzle> explored;
 	private Puzzle truePlat;
+	private int compTemp=0;
+	private int compMem=0;
 
 	public BFS(Puzzle platform) {
 		this.platform = platform;
@@ -29,11 +31,15 @@ public class BFS {
 			//System.out.println(this.frontier.size());
 			//System.out.println(this.explored.size());
 			Puzzle node = this.frontier.poll();
+			compTemp++;
+
 			this.explored.add(node);
 			//node.print();
 			
 			for (String b : ACTIONS) {
 				Puzzle child = new Puzzle(node);
+				compTemp++;
+
 				if(b.equals("H")){
 					if(node.moveHaut()) {
 						child.Haut();
@@ -105,8 +111,24 @@ public class BFS {
 	public static String[] getActions() {
 		return ACTIONS;
 	}
+	public int getCompTemp() {
+		return compTemp;
+	}
+
+	public void setCompTemp(int compTemp) {
+		this.compTemp = compTemp;
+	}
+
+	public int getCompMem() {
+		return compMem;
+	}
+
+	public void setCompMem(int compMem) {
+		this.compMem = compMem;
+	}
 	public void solve() {
 		boolean check = bfs();
+		compMem= this.frontier.size()+this.explored.size();
 		if(check) {
 			System.out.println(this.getTruePlat().getListMove().size());
 			System.out.println(this.getFrontier().size()+this.getExplored().size());
@@ -116,6 +138,7 @@ public class BFS {
 			System.out.println(this.getTruePlat().getScore());
 		}else {
 			System.out.println(this.getFrontier().size()+this.getExplored().size());
+			
 		}
 		
 	}

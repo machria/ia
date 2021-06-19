@@ -3,6 +3,8 @@ public class IDS {
 	private DLS dls;
 	private Puzzle platform;
 	private int co=0;
+	private int compTemp=0;
+	private int compMem=0;
 	
 	public IDS(Puzzle platform) {
 		this.platform = platform;
@@ -22,6 +24,21 @@ public class IDS {
 	
 	public Puzzle getEnd() {
 		return dls.getTruePlat();
+	}
+	public int getCompTemp() {
+		return compTemp;
+	}
+
+	public void setCompTemp(int compTemp) {
+		this.compTemp = compTemp;
+	}
+
+	public int getCompMem() {
+		return compMem;
+	}
+
+	public void setCompMem(int compMem) {
+		this.compMem = compMem;
 	}
 	
 	public boolean solve() throws Exception {
