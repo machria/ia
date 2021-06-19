@@ -40,9 +40,25 @@ public class BD {
 	public void setCompMem(int compMem) {
 		this.compMem = compMem;
 	}
+	
+	public Puzzle getPlat() {
+		return Plat;
+	}
+	public void setPlat(Puzzle plat) {
+		Plat = plat;
+	}
+	public Puzzle getPlat2() {
+		return Plat2;
+	}
+	public void setPlat2(Puzzle plat2) {
+		Plat2 = plat2;
+	}
 	public boolean bd() {
-		if (this.platform.isSuccess())
+		if (this.platform.isSuccess()) {
+			Plat= new Puzzle(platform);
 			return true;
+
+		}
 		frontierf.add(platform);
 		frontierb.add(platformf);
 		explored.clear();
