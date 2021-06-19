@@ -34,34 +34,34 @@ public class Astar {
 			}
 			if(action.equals("H")) {
 				if(puzzle.getTab()[x-1][y]%2==0) {
-					return puzzle.getScore()+1+puzzle.manhattam();
+					return puzzle.getScore()+1+puzzle.manhattan();
 				}
 				else {
-					return puzzle.getScore()+2+puzzle.manhattam();
+					return puzzle.getScore()+2+puzzle.manhattan();
 				}
 			}
 			else if(action.equals("B")) {
 				if(puzzle.getTab()[x+1][y]%2==0) {
-					return puzzle.getScore()+1+puzzle.manhattam();
+					return puzzle.getScore()+1+puzzle.manhattan();
 				}
 				else {
-					return puzzle.getScore()+2+puzzle.manhattam();
+					return puzzle.getScore()+2+puzzle.manhattan();
 				}
 			}
 			else if(action.equals("G")) {
 				if(puzzle.getTab()[x][y-1]%2==0) {
-					return puzzle.getScore()+1+puzzle.manhattam();
+					return puzzle.getScore()+1+puzzle.manhattan();
 				}
 				else {
-					return puzzle.getScore()+2+puzzle.manhattam();
+					return puzzle.getScore()+2+puzzle.manhattan();
 				}
 			}
 			else {
 				if(puzzle.getTab()[x][y+1]%2==0) {
-					return puzzle.getScore()+1+puzzle.manhattam();
+					return puzzle.getScore()+1+puzzle.manhattan();
 				}
 				else {
-					return puzzle.getScore()+2+puzzle.manhattam();
+					return puzzle.getScore()+2+puzzle.manhattan();
 				}
 			}
 		}

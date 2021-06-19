@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -7,40 +10,43 @@ import java.util.concurrent.TimeUnit;
 
 public class App {
 	
-	public static void main(String[] args) throws Exception {
-		
-		  //Puzzle p = loadGrille(); 
-		  //boolean check = p.realisable(); 
-		  //while(!check) p =loadGrille();
-		 
+	public static void main(String[] args) {
+		/*
+		 * Puzzle p = loadGrille(); boolean check = p.realisable(); while(!check) p =
+		 * loadGrille();
+		 */
 		
 		/*
-		 * Experimentation a = new Experimentation(1, 3); a.init();
+		 * Experimentation a = new Experimentation(1, 6); a.init(); ArrayList<Long> b =
+		 * new ArrayList<>(); ArrayList<Integer> c = new ArrayList<>();
+		 * 
+		 * for(int i = 0;i<a.getListPuzzle().size();i++) { GFS gfs = new
+		 * GFS(a.getListPuzzle().get(i)); long start_time = System.currentTimeMillis();
+		 * gfs.solve(); long duration = System.currentTimeMillis() - start_time;
+		 * b.add(duration); c.add(gfs.getExplored().size()+gfs.getFrontiere().size()); }
+		 * 
+		 * for(int i = 0;i<b.size();i++) { System.out.println(b.get(i)); } Integer max =
+		 * Collections.max(c); System.out.println("Max = "+max); int count=0; for(int i
+		 * = 0;i<c.size();i++) { count=count+c.get(i); }
+		 * System.out.println("Moyenne : "+count/c.size());
 		 */
-		ArrayList<Long> b = new ArrayList<>(); 
-		ArrayList<Integer> c = new ArrayList<>(); 
-		Puzzle p = new Puzzle(6);
-		p.initialisation();
-
-		//for(int i = 0;i<a.getListPuzzle().size();i++) {
-			GFS gfs = new GFS(p);
-			long start_time = System.currentTimeMillis();
-			gfs.solve();
-			long duration = System.currentTimeMillis() - start_time;
-			b.add(duration);
-			c.add(gfs.getExplored().size()+gfs.getFrontiere().size());
-		//}
 		
-		for(int i = 0;i<b.size();i++) {
-			System.out.println(b.get(i));
-		}
-		 Integer max = Collections.max(c);
-		 System.out.println("Max = "+max);
-		 int count=0;
-		 for(int i = 0;i<c.size();i++) {
-				count=count+c.get(i);
-		}
-		 System.out.println("Moyenne : "+count/c.size());
+		 Puzzle p = new Puzzle(4);
+		 p.initialisation();
+		 Puzzle t = new Puzzle(p);
+		 //p.print();
+		 //System.out.println(p);
+		 
+		 GFS gfs = new GFS(p);
+		 
+		 gfs.solve();
+		 
+		 
+		 App.saveSolutionToFile(p, gfs.getEnd(), "GFS");
+		 
+		 
+		 
+		 
 		/*
 		 * //System.out.println(p.isSuccess()); Scanner sc = new Scanner(System.in);
 		 * while(!p.isSuccess()) { p.move(sc.nextInt()); p.print();
@@ -260,7 +266,57 @@ public class App {
 		return new Puzzle(size_enter,valeurs);
 
 	}
+	public static void saveSolutionToFile(Puzzle l,Puzzle f, String nom_algo) {
 
+	FileWriter writer;
+	try {
+	writer = new FileWriter("output"+nom_algo+LocalDateTime.now()+".txt", true);
+	writer.write(LocalDateTime.now() + " Grille de départ " + System.lineSeparator() + l.toString() + System.lineSeparator());
+	writer.write(LocalDateTime.now() + " Difficulté : " + l.inversion() + System.lineSeparator());
+	writer.write(LocalDateTime.now() + " : " + nom_algo + System.lineSeparator());
+	} catch (IOException e1) {
+	throw new IllegalStateException(e1);
+	}
+	boolean end=false;
+	int co = -1;
+	for (int i =0; i<f.getListMove().size();i++) {
+		if(f.getListMove().get(i).equals(f.getTabSuc())) {
+			try {
+				writer.write(f.getListMove().get(i).toString()+ System.lineSeparator());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(!end)
+				co++;
+			end=true;
+		}if(!end) {
+			try {
+				writer.write(f.getListMove().get(i).toString()+ System.lineSeparator());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			co++;
+		}
+		
+	}
+	try {
+		writer.write(LocalDateTime.now() + " Mouvement : " + co + System.lineSeparator());
+		writer.write(LocalDateTime.now() + " Cout : " + f.getMove() + System.lineSeparator());
+
+	} catch (IOException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+
+	
+	try {
+	writer.close();
+	} catch (IOException e) {
+	throw new IllegalStateException(e);
+	}
+	}
 
 }
 	

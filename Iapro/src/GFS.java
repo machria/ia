@@ -69,19 +69,19 @@ public class GFS {
 		Puzzle tmp = new Puzzle(puzzle);
 		if(action.equals("H")) {
 			tmp.Haut();
-			score = tmp.manhattam();
+			score = tmp.manhattan();
 		}	
 		else if(action.equals("B")) {
 			tmp.Bas();
-			score = tmp.manhattam();
+			score = tmp.manhattan();
 		}
 		else if(action.equals("G")) {
 			tmp.Gauche();
-			score = tmp.manhattam();
+			score = tmp.manhattan();
 		}
 		else {
 			tmp.Droite();
-			score = tmp.manhattam();
+			score = tmp.manhattan();
 		}
 		return score;
 	}

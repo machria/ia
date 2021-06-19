@@ -135,57 +135,15 @@ public class BD {
 	}
 }
 
-	public void solve() {
-		if(Plat2!=null) {
-			System.out.println(this.Plat.getListMove().size()+this.Plat2.getListMove().size());
+	public boolean solve() {
+		boolean check = bd();
+		if (check) {
+			if(Plat2!=null) {
+				System.out.println(this.Plat.getListMove().size()+this.Plat2.getListMove().size());
 
-			  
+				  
 
-		    for (int i =0; i<Plat.getListMove().size();i++) {
-
-		      
-
-		      
-
-		      
-
-		        System.out.println(Plat.getListMove().get(i));
-
-		      
-
-		      
-
-		      
-
-		        }
-		    
-		    //System.out.println(this.Plat2.getListMove().size());
-		    ArrayList<String> a = new ArrayList<>();
-		   //Collections.reverse(Plat2.getListMove());
-			  
-		    //Plat2.setListMove(Plat2.getListMove());
-		    
-		    for (int i =0; i<Plat2.getListMove().size();i++) {
-
-		      
-
-		      
-
-		      
-
-		        a.add(Plat2.getListMove().get(i));
-
-		      
-
-		      
-
-		      
-
-		        }
-		    System.out.println("-----------------------");
-		    Collections.reverse(a);
-
-		    for (int i =0; i<a.size();i++) {
+			    for (int i =0; i<Plat.getListMove().size();i++) {
 
 			      
 
@@ -193,40 +151,90 @@ public class BD {
 
 			      
 
-		        System.out.println(a.get(i));
+			        System.out.println(Plat.getListMove().get(i));
 
-		      
+			      
 
-		      
+			      
 
-		      
+			      
 
-		        }
+			        }
+			    
+			    //System.out.println(this.Plat2.getListMove().size());
+			    ArrayList<String> a = new ArrayList<>();
+			   //Collections.reverse(Plat2.getListMove());
+				  
+			    //Plat2.setListMove(Plat2.getListMove());
+			    
+			    for (int i =0; i<Plat2.getListMove().size();i++) {
+
+			      
+
+			      
+
+			      
+
+			        a.add(Plat2.getListMove().get(i));
+
+			      
+
+			      
+
+			      
+
+			        }
+			    System.out.println("-----------------------");
+			    Collections.reverse(a);
+
+			    for (int i =0; i<a.size();i++) {
+
+				      
+
+				      
+
+				      
+
+			        System.out.println(a.get(i));
+
+			      
+
+			      
+
+			      
+
+			        }
+			}else {
+				System.out.println(this.Plat.getListMove().size());
+
+				  
+
+			    for (int i =0; i<Plat.getListMove().size();i++) {
+
+			      
+
+			      
+
+			      
+
+			        System.out.println(Plat.getListMove().get(i));
+
+			      
+
+			      
+
+			      
+
+			        }
+			}
+			 return true;
 		}else {
-			System.out.println(this.Plat.getListMove().size());
-
-			  
-
-		    for (int i =0; i<Plat.getListMove().size();i++) {
-
-		      
-
-		      
-
-		      
-
-		        System.out.println(Plat.getListMove().get(i));
-
-		      
-
-		      
-
-		      
-
-		        }
+			return false;
 		}
+		
+	   
+
 	}
-	
 	
 	
 }

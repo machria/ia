@@ -15,6 +15,7 @@ public class Puzzle implements Comparable {
 	private int[][] tab;
 	private int[][] tabS;
 	private int move=0;
+	private int cout=0;
 	private ArrayList<String> listMove=new ArrayList<>();
 	private int score;
 	private HashMap<Integer,String>  solMan = new HashMap<>();
@@ -72,7 +73,23 @@ public class Puzzle implements Comparable {
 		this.print();
 		System.out.println(this.inversion());
 	}
-
+	public String getTabSuc() {
+		String s="";
+		for (int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				if(tabS[i][j]==-1)
+					s+="b";
+				else
+					s+=tabS[i][j];
+				if (j==n-1)
+					s+="\n";
+				else
+					s+="|";
+			}
+		}
+		return s;
+	}
+	
 	public int getMove() {
 		return move;
 	}
@@ -93,6 +110,14 @@ public class Puzzle implements Comparable {
 		return tab;
 	}
 
+
+	public int getCout() {
+		return cout;
+	}
+
+	public void setCout(int cout) {
+		this.cout = cout;
+	}
 
 	public void setTab(int[][] tab) {
 		this.tab = tab;
@@ -521,10 +546,10 @@ public class Puzzle implements Comparable {
 			}
 		}
 		if(this.getTab()[x+1][y]%2==0) {
-			this.setScore( this.getScore()+1);
+			this.setCout( this.getCout()+1);
 		}
 		else {
-			this.setScore( this.getScore()+2);
+			this.setCout( this.getCout()+2);
 		}
 		tab[x][y]=tab[x+1][y];//Haut
 		tab[x+1][y]=-1;
@@ -545,10 +570,10 @@ public class Puzzle implements Comparable {
 			}
 		}
 		if(this.getTab()[x-1][y]%2==0) {
-			this.setScore( this.getScore()+1);
+			this.setCout( this.getCout()+1);
 		}
 		else {
-			this.setScore( this.getScore()+2);
+			this.setCout( this.getCout()+2);
 		}
 		tab[x][y]=tab[x-1][y];
 		tab[x-1][y]=-1; //Bas
@@ -568,10 +593,10 @@ public class Puzzle implements Comparable {
 			}
 		}
 		if(this.getTab()[x][y+1]%2==0) {
-			this.setScore( this.getScore()+1);
+			this.setCout( this.getCout()+1);
 		}
 		else {
-			this.setScore( this.getScore()+2);
+			this.setCout( this.getCout()+2);
 		}
 		tab[x][y]=tab[x][y+1];
 		tab[x][y+1]=-1; //Droite
@@ -591,10 +616,10 @@ public class Puzzle implements Comparable {
 			}
 		}
 		if(this.getTab()[x][y-1]%2==0) {
-			this.setScore( this.getScore()+1);
+			this.setCout( this.getCout()+1);
 		}
 		else {
-			this.setScore( this.getScore()+2);
+			this.setCout( this.getCout()+2);
 		}
 		tab[x][y]=tab[x][y-1];
 		tab[x][y-1]=-1;//Gauche
@@ -856,7 +881,7 @@ public class Puzzle implements Comparable {
 		return cpt;
 	}
 	
-	public int manhattam() {
+	public int manhattan() {
 		int manhattan = 0;
 		int cpt =0;
 		for (int i=0;i<n;i++) {

@@ -18,7 +18,7 @@ public class DFS {
 		this.explored = new HashSet<Puzzle>();
 	}
 
-	public boolean dfs() {
+	public boolean bfs() {
 		if (this.platform.isSuccess())
 			return true;
 		this.frontier.add(this.truePlat);
@@ -97,20 +97,6 @@ public class DFS {
 
 	public static String[] getActions() {
 		return ACTIONS;
-	}
-	public void solve() {
-		boolean check = dfs();
-		if(check) {
-			System.out.println(this.getTruePlat().getListMove().size());
-			System.out.println(this.getTruePlat().getListMove().size()+this.getExplored().size());
-			for (int i =0; i<this.getTruePlat().getListMove().size();i++) {
-				System.out.println(this.getTruePlat().getListMove().get(i));
-			}
-			System.out.println(this.getTruePlat().getScore());
-		}else {
-			System.out.println(this.getFrontier().size()+this.getExplored().size());
-		}
-		
 	}
 
 
