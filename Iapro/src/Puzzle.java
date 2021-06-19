@@ -27,13 +27,8 @@ public class Puzzle implements Comparable {
 		this.tab =new int[n][n];
 		this.tabS =new int[n][n];
 		this.score =0;
-		init2();
-		print();
-		System.out.println(this.inversion());
+		init();
 		
-		while(!realisable()) { 
-			init2(); 
-		}
 		 
 	}
 	
@@ -189,18 +184,14 @@ public class Puzzle implements Comparable {
 			}
 		}
 			
-		
-		Collections.shuffle(a);
-		int k = 0;
-			for (int i=0;i<n;i++) {
-				for(int j=0;j<n;j++) {
-						tab[i][j]=a.get(k);
-						k++;
-					
-						
-					
-				}
-			}
+		/*
+		 * Collections.shuffle(a); int k = 0; for (int i=0;i<n;i++) { for(int
+		 * j=0;j<n;j++) { tab[i][j]=a.get(k); k++;
+		 * 
+		 * 
+		 * 
+		 * } }
+		 */
 		
 		
 	}

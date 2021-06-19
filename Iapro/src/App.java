@@ -31,18 +31,25 @@ public class App {
 		 * System.out.println("Moyenne : "+count/c.size());
 		 */
 		
-		 Puzzle p = new Puzzle(4);
+		 Puzzle p = new Puzzle(3);
 		 p.initialisation();
 		 Puzzle t = new Puzzle(p);
 		 //p.print();
 		 //System.out.println(p);
 		 
-		 GFS gfs = new GFS(p);
+		 UCS ucs = new UCS(p);
 		 
-		 gfs.solve();
+		 ucs.solve();
 		 
 		 
-		 App.saveSolutionToFile(p, gfs.getEnd(), "GFS");
+		 App.saveSolutionToFile(p, ucs.getEnd(), "UCS");
+		 
+		 ILS ils = new ILS(t);
+		 
+		 ils.solve();
+		 
+		 
+		 App.saveSolutionToFile(t, ils.getEnd(), "ILS");
 		 
 		 
 		 
@@ -278,7 +285,7 @@ public class App {
 	throw new IllegalStateException(e1);
 	}
 	boolean end=false;
-	int co = -1;
+	int co = 0;
 	for (int i =0; i<f.getListMove().size();i++) {
 		if(f.getListMove().get(i).equals(f.getTabSuc())) {
 			try {
