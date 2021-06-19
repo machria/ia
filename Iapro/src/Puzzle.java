@@ -28,7 +28,7 @@ public class Puzzle implements Comparable {
 		this.tabS =new int[n][n];
 		this.score =0;
 		init();
-		
+		initialisation();
 		 
 	}
 	

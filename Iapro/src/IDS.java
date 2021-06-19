@@ -1,6 +1,14 @@
 
 public class IDS {
 	private DLS dls;
+	public int getCo() {
+		return co;
+	}
+
+	public void setCo(int co) {
+		this.co = co;
+	}
+
 	private Puzzle platform;
 	private int co=0;
 	private int compTemp=0;
