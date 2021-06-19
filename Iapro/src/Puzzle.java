@@ -57,6 +57,7 @@ public class Puzzle implements Comparable {
 			this.listMove.add(x.getListMove().get(i));
 		}
 		this.score=x.score;
+		this.cout=x.cout;
 	}
 	
 	

@@ -303,7 +303,7 @@ public class App {
 	}
 	try {
 		writer.write(LocalDateTime.now() + " Mouvement : " + co + System.lineSeparator());
-		writer.write(LocalDateTime.now() + " Cout : " + f.getMove() + System.lineSeparator());
+		writer.write(LocalDateTime.now() + " Cout : " + f.getCout() + System.lineSeparator());
 
 	} catch (IOException e1) {
 		// TODO Auto-generated catch block
