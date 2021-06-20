@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 public class App {
 
 	public static void main(String[] args) throws Exception {
-		Experimentation a = new Experimentation(50, 2);
+		Experimentation a = new Experimentation(1, 3);
 		a.init();
 		ArrayList<Boolean> resGFS = new ArrayList<>();
 		ArrayList<Long> gfsDuration = new ArrayList();
@@ -41,22 +41,22 @@ public class App {
 			if (gfs == null)
 				App.saveSolutionToFile(a.getListPuzzle().get(i), "GFS", duration);
 			else {
-				App.saveSolutionToFile(a.getListPuzzle().get(i), gfs.getEnd(), "GFS", gfs.getCompMem(),
-						gfs.getCompTemp(), duration);
-				gfsCout.add(gfs.getEnd().getCout());
-				gfsMouvement.add(gfs.getEnd().getMove());
+				
+				
+				if(resGFS.get(resGFS.size()-1)) {
+					gfsCout.add(gfs.getEnd().getCout());
+					gfsMouvement.add(gfs.getEnd().getMove());
+					App.saveSolutionToFile(a.getListPuzzle().get(i), gfs.getEnd(), "GFS", gfs.getCompMem(),
+							gfs.getCompTemp(), duration);
+				}else
+					App.saveSolutionToFile(a.getListPuzzle().get(i), "GFS", duration);
+
 			}
 				
 		}
 		
 
-		int gfs = 0;
-		for (int i = 0; i < resGFS.size(); i++) {
-			if (resGFS.get(i))
-				gfs++;
-		}
-		float moyGFS = (float) gfs / resGFS.size();
-		System.out.println("GFS : " + moyGFS);
+		
 		
 		ArrayList<Boolean> resAstar = new ArrayList<>();
 		
@@ -88,10 +88,15 @@ public class App {
 			if (astar == null)
 				App.saveSolutionToFile(a.getListPuzzle().get(i), "Astar", duration);
 			else {
-				App.saveSolutionToFile(a.getListPuzzle().get(i), astar.getEnd(), "Astar", astar.getCompMem(),
-						astar.getCompTemp(), duration);
-				astarCout.add(astar.getEnd().getCout());
-				astarMouvement.add(astar.getEnd().getMove());
+				
+				if(resAstar.get(resAstar.size()-1)) {
+					astarCout.add(astar.getEnd().getCout());
+					astarMouvement.add(astar.getEnd().getMove());
+					App.saveSolutionToFile(a.getListPuzzle().get(i), astar.getEnd(), "Astar", astar.getCompMem(),
+							astar.getCompTemp(), duration);
+				}else
+					App.saveSolutionToFile(a.getListPuzzle().get(i), "Astar", duration);
+				
 			}
 				
 		}
@@ -125,10 +130,15 @@ public class App {
 			if (ucs == null)
 				App.saveSolutionToFile(a.getListPuzzle().get(i), "UCS", duration);
 			else {
-				App.saveSolutionToFile(a.getListPuzzle().get(i), ucs.getEnd(), "UCS", ucs.getCompMem(),
-						ucs.getCompTemp(), duration);
-				ucsMouvement.add(ucs.getEnd().getCout());
-				ucsCout.add(ucs.getEnd().getMove());
+				
+				if(resUCS.get(resUCS.size()-1)) {
+					ucsMouvement.add(ucs.getEnd().getCout());
+					ucsCout.add(ucs.getEnd().getMove());
+					App.saveSolutionToFile(a.getListPuzzle().get(i), ucs.getEnd(), "UCS", ucs.getCompMem(),
+							ucs.getCompTemp(), duration);
+				}else
+					App.saveSolutionToFile(a.getListPuzzle().get(i), "UCS", duration);
+				
 			}
 				
 		}
@@ -161,47 +171,23 @@ public class App {
 			if (ils == null)
 				App.saveSolutionToFile(a.getListPuzzle().get(i), "ILS", duration);
 			else {
-				ilsCout.add(ils.getEnd().getCout());
-				ilsMouvement.add(ils.getEnd().getMove());
-				App.saveSolutionToFile(a.getListPuzzle().get(i), ils.getEnd(), "ILS", ils.getCompMem(),
-						ils.getCompTemp(), duration);
+				if(resILS.get(resILS.size()-1)) {
+					ilsCout.add(ils.getEnd().getCout());
+					ilsMouvement.add(ils.getEnd().getMove());
+					App.saveSolutionToFile(a.getListPuzzle().get(i), ils.getEnd(), "ILS", ils.getCompMem(),
+							ils.getCompTemp(), duration);
+				}else
+					App.saveSolutionToFile(a.getListPuzzle().get(i), "ILS", duration);
+				
+				
 			}
 				
 		}
 		
-		int gfs2 = 0;
-		for (int i = 0; i < resGFS.size(); i++) {
-			if (resGFS.get(i))
-				gfs++;
-		}
-		float moyGFS2 = (float) gfs / resGFS.size();
-		System.out.println("GFS : " + moyGFS);
-		int astar = 0;
-		for (int i = 0; i < resAstar.size(); i++) {
-			if (resAstar.get(i))
-				astar++;
-		}
-		float moyAstar = (float) astar / resAstar.size();
-
-		System.out.println("Astar : " + moyAstar);
-
-		int ucs = 0;
-		for (int i = 0; i < resUCS.size(); i++) {
-			if (resUCS.get(i))
-				ucs++;
-		}
-		float moyUCS = (float) ucs / resUCS.size();
-
-		System.out.println("UCS : " + moyUCS);
-
-		int ils = 0;
-		for (int i = 0; i < resILS.size(); i++) {
-			if (resILS.get(i))
-				ils++;
-		}
-		float moyILS = (float) ils / resILS.size();
-		System.out.println("ILS : " + moyILS);
+		
 		// IDS
+		ArrayList<Boolean> resIDS = new ArrayList<>();
+
 		ArrayList<Long> idsDuration = new ArrayList();
 		ArrayList<Integer> idsMem = new ArrayList();
 		ArrayList<Integer> idsTemp = new ArrayList();
@@ -212,7 +198,7 @@ public class App {
 			IDS ids = new IDS(a.getListPuzzle().get(i));
 			long start_time = System.currentTimeMillis();
 			try {
-				ids.solve();
+				resIDS.add(ids.solve());
 			} catch (Exception e) {
 				System.out.println("Erreur IDS");
 			} catch (OutOfMemoryError o) {
@@ -226,15 +212,22 @@ public class App {
 			if (ids == null)
 				App.saveSolutionToFile(a.getListPuzzle().get(i), "IDS", duration);
 			else {
-				limite = ids.getCo();
-				idsCout.add(ids.getEnd().getCout());
-				idsMouvement.add(ids.getEnd().getMove());
-				App.saveSolutionToFile(a.getListPuzzle().get(i), ids.getEnd(), "IDS", ids.getCompMem(),
-						ids.getCompTemp(), duration);
+				
+				if(resIDS.get(resIDS.size()-1)) {
+					limite = ids.getCo();
+					idsCout.add(ids.getEnd().getCout());
+					idsMouvement.add(ids.getEnd().getMove());
+					App.saveSolutionToFile(a.getListPuzzle().get(i), ids.getEnd(), "IDS", ids.getCompMem(),
+							ids.getCompTemp(), duration);
+				}else
+					App.saveSolutionToFile(a.getListPuzzle().get(i), "IDS", duration);
+				
 			}
 		}
 		
 		// DLS
+		ArrayList<Boolean> resDLS = new ArrayList<>();
+
 		ArrayList<Long> dlsDuration = new ArrayList();
 		ArrayList<Integer> dlsMem = new ArrayList();
 		ArrayList<Integer> dlsTemp = new ArrayList();
@@ -244,7 +237,7 @@ public class App {
 			DLS dls = new DLS(a.getListPuzzle().get(i));
 			long start_time = System.currentTimeMillis();
 			try {
-				dls.solve(limite, a.getListPuzzle().get(i));
+				resDLS.add(dls.solve(limite, a.getListPuzzle().get(i)));
 			} catch (Exception e) {
 				System.out.println("Erreur DLS");
 			} catch (OutOfMemoryError o) {
@@ -258,15 +251,22 @@ public class App {
 			if (dls == null)
 				App.saveSolutionToFile(a.getListPuzzle().get(i), "DLS", duration);
 			else {
-				dlsCout.add(dls.getTruePlat().getCout());
-				dlsMouvement.add(dls.getTruePlat().getMove());
-				App.saveSolutionToFile(a.getListPuzzle().get(i), dls.getTruePlat(), "DLS", dls.getCompMem(),
-						dls.getCompTemp(), duration);
+				
+				if(resDLS.get(resDLS.size()-1)) {
+					dlsCout.add(dls.getTruePlat().getCout());
+					dlsMouvement.add(dls.getTruePlat().getMove());
+					App.saveSolutionToFile(a.getListPuzzle().get(i), dls.getTruePlat(), "DLS", dls.getCompMem(),
+							dls.getCompTemp(), duration);
+				}else
+					App.saveSolutionToFile(a.getListPuzzle().get(i), "DLS", duration);
+				
 			}
 				
 		}
 		
 		// BFS
+		ArrayList<Boolean> resBFS = new ArrayList<>();
+
 		ArrayList<Long> bfsDuration = new ArrayList();
 		ArrayList<Integer> bfsMem = new ArrayList();
 		ArrayList<Integer> bfsTemp = new ArrayList();
@@ -276,7 +276,7 @@ public class App {
 			BFS bfs = new BFS(a.getListPuzzle().get(i));
 			long start_time = System.currentTimeMillis();
 			try {
-				bfs.solve();
+				resBFS.add(bfs.solve());
 			} catch (Exception e) {
 				System.out.println("Erreur BFS");
 			} catch (OutOfMemoryError o) {
@@ -290,16 +290,23 @@ public class App {
 			if (bfs == null)
 				App.saveSolutionToFile(a.getListPuzzle().get(i), "BFS", duration);
 			else {
-				bfsCout.add(bfs.getTruePlat().getCout());
-				bfsMouvement.add(bfs.getTruePlat().getMove());
-				App.saveSolutionToFile(a.getListPuzzle().get(i), bfs.getTruePlat(), "BFS", bfs.getCompMem(),
-						bfs.getCompTemp(), duration);
+				if(resBFS.get(resBFS.size()-1)) {
+					bfsCout.add(bfs.getTruePlat().getCout());
+					bfsMouvement.add(bfs.getTruePlat().getMove());
+					App.saveSolutionToFile(a.getListPuzzle().get(i), bfs.getTruePlat(), "BFS", bfs.getCompMem(),
+							bfs.getCompTemp(), duration);
+				}else
+					App.saveSolutionToFile(a.getListPuzzle().get(i), "BFS", duration);
+				
+				
 			}
 				
 		}
 		
 		
 		// BD
+		ArrayList<Boolean> resBD = new ArrayList<>();
+
 		ArrayList<Long> bdDuration = new ArrayList();
 		ArrayList<Integer> bdMem = new ArrayList();
 		ArrayList<Integer> bdTemp = new ArrayList();
@@ -309,7 +316,8 @@ public class App {
 			BD bd = new BD(a.getListPuzzle().get(i));
 			long start_time = System.currentTimeMillis();
 			try {
-				bd.solve();
+				resBD.add(bd.solve());
+				
 			} catch (Exception e) {
 				System.out.println("Erreur BD");
 			} catch (OutOfMemoryError o) {
@@ -323,25 +331,32 @@ public class App {
 			if (bd == null)
 				App.saveSolutionToFile(a.getListPuzzle().get(i), "BD", duration);
 			else {
-				App.saveSolutionToFile(a.getListPuzzle().get(i), bd, duration);
-				int bdC =0;
-				int bdM =0;
+				if(resBD.get(resBD.size()-1)) {
+					int bdC =0;
+					int bdM =0;
 
-				if(bd.getPlat()!=null) {
-					bdC=bdC+bd.getPlat().getCout();
-					bdM=bdM+bd.getPlat().getMove();
-				}
-				if(bd.getPlat2()!=null) {
-					bdC+=bd.getPlat2().getCout();
-					bdM=bdM+bd.getPlat2().getMove();
+					if(bd.getPlat()!=null) {
+						bdC=bdC+bd.getPlat().getCout();
+						bdM=bdM+bd.getPlat().getMove();
+					}
+					if(bd.getPlat2()!=null) {
+						bdC+=bd.getPlat2().getCout();
+						bdM=bdM+bd.getPlat2().getMove();
 
-				}
-				bdCout.add(bdC);
-				bdMouvement.add(bdM);
+					}
+					bdCout.add(bdC);
+					bdMouvement.add(bdM);
+					App.saveSolutionToFile(a.getListPuzzle().get(i), bd, duration);
+
+				}else
+					App.saveSolutionToFile(a.getListPuzzle().get(i), "BD", duration);
+
 			}
 		}
 		
 		// DFS
+		ArrayList<Boolean> resDFS = new ArrayList<>();
+
 		ArrayList<Long> dfsDuration = new ArrayList();
 		ArrayList<Integer> dfsMem = new ArrayList();
 		ArrayList<Integer> dfsTemp = new ArrayList();
@@ -351,7 +366,8 @@ public class App {
 			DFS dfs = new DFS(a.getListPuzzle().get(i));
 			long start_time = System.currentTimeMillis();
 			try {
-				dfs.solve();
+				resDFS.add(dfs.solve());
+				
 			} catch (Exception e) {
 				System.out.println("Erreur DFS");
 			} catch (OutOfMemoryError o) {
@@ -365,14 +381,21 @@ public class App {
 			if (dfs == null)
 				App.saveSolutionToFile(a.getListPuzzle().get(i), "DFS", duration);
 			else {
-				dfsCout.add(dfs.getTruePlat().getCout());
-				dfsMouvement.add(dfs.getTruePlat().getMove());
-				App.saveSolutionToFile(a.getListPuzzle().get(i), dfs.getTruePlat(), "DFS", dfs.getCompMem(),
-						dfs.getCompTemp(), duration);
+				if(resDFS.get(resDFS.size()-1)) {
+					dfsCout.add(dfs.getTruePlat().getCout());
+					dfsMouvement.add(dfs.getTruePlat().getMove());
+					App.saveSolutionToFile(a.getListPuzzle().get(i), dfs.getTruePlat(), "DFS", dfs.getCompMem(),
+							dfs.getCompTemp(), duration);
+				}else
+					App.saveSolutionToFile(a.getListPuzzle().get(i), "DFS", duration);
+				
+				
 			}
 				
 		}
 		System.out.println("Résultat GFS");
+		System.out.println("Succes");
+		System.out.println(resGFS);
 		System.out.println("Duration");
 		System.out.println(gfsDuration);
 		System.out.println("Memory");
@@ -384,7 +407,10 @@ public class App {
 		System.out.println("Cout");
 		System.out.println(gfsCout);
 		System.out.println("Fin GFS");
+		
 		System.out.println("Résultat Astar");
+		System.out.println("Succes");
+		System.out.println(resAstar);
 		System.out.println("Duration");
 		System.out.println(astarDuration);
 		System.out.println("Memory");
@@ -396,7 +422,10 @@ public class App {
 		System.out.println("Cout");
 		System.out.println(astarCout);
 		System.out.println("Fin Astar");
+		
 		System.out.println("Résultat UCS");
+		System.out.println("Succes");
+		System.out.println(resUCS);
 		System.out.println("Duration");
 		System.out.println(ucsDuration);
 		System.out.println("Memory");
@@ -408,7 +437,10 @@ public class App {
 		System.out.println("Cout");
 		System.out.println(ucsCout);
 		System.out.println("Fin UCS");
+		
 		System.out.println("Résultat ILS");
+		System.out.println("Succes");
+		System.out.println(resILS);
 		System.out.println("Duration");
 		System.out.println(ilsDuration);
 		System.out.println("Memory");
@@ -420,7 +452,10 @@ public class App {
 		System.out.println("Cout");
 		System.out.println(ilsCout);
 		System.out.println("Fin ILS");
+		
 		System.out.println("Résultat IDS");
+		System.out.println("Succes");
+		System.out.println(resIDS);
 		System.out.println("Duration");
 		System.out.println(idsDuration);
 		System.out.println("Memory");
@@ -432,7 +467,10 @@ public class App {
 		System.out.println("Cout");
 		System.out.println(idsCout);
 		System.out.println("Fin IDS");
+		
 		System.out.println("Résultat DLS");
+		System.out.println("Succes");
+		System.out.println(resDLS);
 		System.out.println("Duration");
 		System.out.println(dlsDuration);
 		System.out.println("Memory");
@@ -444,7 +482,10 @@ public class App {
 		System.out.println("Cout");
 		System.out.println(dlsCout);
 		System.out.println("Fin DLS");
+		
 		System.out.println("Résultat BFS");
+		System.out.println("Succes");
+		System.out.println(resBFS);
 		System.out.println("Duration");
 		System.out.println(bfsDuration);
 		System.out.println("Memory");
@@ -456,7 +497,10 @@ public class App {
 		System.out.println("Cout");
 		System.out.println(bfsCout);
 		System.out.println("Fin BFS");
+		
 		System.out.println("Résultat BD");
+		System.out.println("Succes");
+		System.out.println(resBD);
 		System.out.println("Duration");
 		System.out.println(bdDuration);
 		System.out.println("Memory");
@@ -468,7 +512,10 @@ public class App {
 		System.out.println("Cout");
 		System.out.println(bdCout);
 		System.out.println("Fin BD");
+		
 		System.out.println("Résultat DFS");
+		System.out.println("Succes");
+		System.out.println(resDFS);
 		System.out.println("Duration");
 		System.out.println(dfsDuration);
 		System.out.println("Memory");

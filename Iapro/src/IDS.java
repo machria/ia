@@ -21,10 +21,18 @@ public class IDS {
 	}
 	
 	public int ids() throws Exception {
+		long start_time = System.currentTimeMillis();
+		long duration = System.currentTimeMillis() - start_time;
 		while(!dls.getTruePlat().isSuccess()) {
-			dls.dls(platform, co);
-			//System.out.println(c);
-				co++;
+			while(duration<1000) {
+				duration = System.currentTimeMillis() - start_time;
+
+				dls.dls(platform, co);
+				//System.out.println(c);
+					co++;
+					return -1;
+			}
+			
 			
 		}
 		return co;
@@ -51,6 +59,9 @@ public class IDS {
 	
 	public boolean solve() throws Exception {
 		int t = ids();
+		if(t==-1) {
+			return false;
+		}
 		System.out.println(this.getEnd().getListMove().size());
 		System.out.println(t);
 		for (int i =0; i<this.getEnd().getListMove().size();i++) {
