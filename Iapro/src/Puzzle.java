@@ -10,9 +10,9 @@ public class Puzzle implements Comparable {
 	
 	
 
-	private int n;
+	protected int n;
 	private static final String[] ACTIONS = { "H", "B", "G", "D" };
-	private int[][] tab;
+	protected int[][] tab;
 	private int[][] tabS;
 	private int move=0;
 	private int cout=0;

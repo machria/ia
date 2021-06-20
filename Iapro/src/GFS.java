@@ -11,12 +11,22 @@ public class GFS {
 	private Puzzle end;
 	private int compTemp=0;
 	private int compMem=0;
+	public String h;
 	
 	public GFS(Puzzle racine) {
 		this.racine = new Puzzle(racine);
 		this.end = new Puzzle(racine);
 		this.explored = new HashSet<Puzzle>();
 		this.frontiere = new TreeSet<Puzzle>();
+		h="M";
+	}
+	
+	public GFS(Puzzle racine,String h) {
+		this.racine = new Puzzle(racine);
+		this.end = new Puzzle(racine);
+		this.explored = new HashSet<Puzzle>();
+		this.frontiere = new TreeSet<Puzzle>();
+		this.h=h;
 	}
 	
 	public int getCompTemp() {
@@ -83,25 +93,68 @@ public class GFS {
 	}
 	
 	public int Score2(Puzzle puzzle, String action) {
-		int score;
-		Puzzle tmp = new Puzzle(puzzle);
-		if(action.equals("H")) {
-			tmp.Haut();
-			score = tmp.manhattan();
-		}	
-		else if(action.equals("B")) {
-			tmp.Bas();
-			score = tmp.manhattan();
+		if(this.h.equals("M")) {
+			int score;
+			Puzzle tmp = new Puzzle(puzzle);
+			if(action.equals("H")) {
+				tmp.Haut();
+				score = tmp.manhattan();
+			}	
+			else if(action.equals("B")) {
+				tmp.Bas();
+				score = tmp.manhattan();
+			}
+			else if(action.equals("G")) {
+				tmp.Gauche();
+				score = tmp.manhattan();
+			}
+			else {
+				tmp.Droite();
+				score = tmp.manhattan();
+			}
+			return score;
+		}else if(this.h.equals("h")) {
+			int score;
+			Puzzle tmp = new Puzzle(puzzle);
+			if(action.equals("H")) {
+				tmp.Haut();
+				score = tmp.hamming();
+			}	
+			else if(action.equals("B")) {
+				tmp.Bas();
+				score = tmp.hamming();
+			}
+			else if(action.equals("G")) {
+				tmp.Gauche();
+				score = tmp.hamming();
+			}
+			else {
+				tmp.Droite();
+				score = tmp.hamming();
+			}
+			return score;
+		}else {
+			int score;
+			Puzzle tmp = new Puzzle(puzzle);
+			if(action.equals("H")) {
+				tmp.Haut();
+				score = tmp.inversion();
+			}	
+			else if(action.equals("B")) {
+				tmp.Bas();
+				score = tmp.inversion();
+			}
+			else if(action.equals("G")) {
+				tmp.Gauche();
+				score = tmp.inversion();
+			}
+			else {
+				tmp.Droite();
+				score = tmp.inversion();
+			}
+			return score;
 		}
-		else if(action.equals("G")) {
-			tmp.Gauche();
-			score = tmp.manhattan();
-		}
-		else {
-			tmp.Droite();
-			score = tmp.manhattan();
-		}
-		return score;
+		
 	}
 
 	public Puzzle getRacine() {
@@ -146,7 +199,7 @@ public class GFS {
 		long duration = System.currentTimeMillis() - start_time;
 		
 			while (true) {
-				while(duration<30000) {
+				while(duration<1000) {
 					duration = System.currentTimeMillis() - start_time;
 				if (this.frontiere.isEmpty())
 					return false;
