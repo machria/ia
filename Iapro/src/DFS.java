@@ -40,44 +40,52 @@ public class DFS {
 			return true;
 		this.frontier.add(this.truePlat);
 		while (true) {
-			if (this.frontier.isEmpty())
-				return false;
-			Puzzle node = this.frontier.poll();
-			compTemp++;
-			this.explored.add(node);
-			for (String b : ACTIONS) {
-				Puzzle child = new Puzzle(node);
+			long start_time = System.currentTimeMillis();
+			long duration = System.currentTimeMillis() - start_time;
+			while(duration<1000) {
+				duration = System.currentTimeMillis() - start_time;
+
+				if (this.frontier.isEmpty())
+					return false;
+				
+				Puzzle node = this.frontier.poll();
 				compTemp++;
-				if(b.equals("H")){
-					if(node.moveHaut()) {
-						child.Haut();
+				this.explored.add(node);
+				for (String b : ACTIONS) {
+					Puzzle child = new Puzzle(node);
+					compTemp++;
+					if(b.equals("H")){
+						if(node.moveHaut()) {
+							child.Haut();
+						}
 					}
-				}
-				if(b.equals("B")){
-					if(node.moveBas()) {
-						child.Bas();
-					
+					if(b.equals("B")){
+						if(node.moveBas()) {
+							child.Bas();
+						
+						}
 					}
-				}
-				if(b.equals("D")){
-					if(node.moveDroite()) {
-						child.Droite();
+					if(b.equals("D")){
+						if(node.moveDroite()) {
+							child.Droite();
+						}
 					}
-				}
-				if(b.equals("G")){
-					if(node.moveGauche()) {
-						child.Gauche();
+					if(b.equals("G")){
+						if(node.moveGauche()) {
+							child.Gauche();
+						}
 					}
-				}
-				if(!this.explored.contains(child) && !this.frontier.contains(child)) {
-					if(child.isSuccess()) {
-						this.truePlat = child;
-						return true;
+					if(!this.explored.contains(child) && !this.frontier.contains(child)) {
+						if(child.isSuccess()) {
+							this.truePlat = child;
+							return true;
+						}
+						this.frontier.addFirst(child);
 					}
-					this.frontier.addFirst(child);
 				}
 			}
 			
+			return false;
 
 		}
 	}

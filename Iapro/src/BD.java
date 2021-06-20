@@ -64,44 +64,101 @@ public class BD {
 		explored.clear();
 		Puzzle node;
 		while(true) {
-			if(frontierf.isEmpty()||frontierb.isEmpty())
-				return false;
-			if(!frontierf.isEmpty()) {
-				node = frontierf.pop();
-				compTemp++;
-				explored.add(node);
-				for (String b : ACTIONS) {
-					Puzzle child = new Puzzle(node);
+			long start_time = System.currentTimeMillis();
+			long duration = System.currentTimeMillis() - start_time;
+			while(duration<1000) {
+				if(frontierf.isEmpty()||frontierb.isEmpty())
+					return false;
+				if(!frontierf.isEmpty()) {
+					node = frontierf.pop();
 					compTemp++;
-					if(b.equals("H")){
-						if(node.moveHaut2()) {
-							child.Haut();
+					explored.add(node);
+					for (String b : ACTIONS) {
+						Puzzle child = new Puzzle(node);
+						compTemp++;
+						if(b.equals("H")){
+							if(node.moveHaut2()) {
+								child.Haut();
+							}
 						}
-					}
-					if(b.equals("B")){
-						if(node.moveBas2()) {
-							child.Bas();
-						
+						if(b.equals("B")){
+							if(node.moveBas2()) {
+								child.Bas();
+							
+							}
 						}
-					}
-					if(b.equals("D")){
-						if(node.moveDroite2()) {
-							child.Droite();
+						if(b.equals("D")){
+							if(node.moveDroite2()) {
+								child.Droite();
+							}
 						}
-					}
-					if(b.equals("G")){
-						if(node.moveGauche2()) {
-							child.Gauche();
+						if(b.equals("G")){
+							if(node.moveGauche2()) {
+								child.Gauche();
+							}
 						}
-					}
-					if(node.isSuccess()|| frontierb.contains(node)) {
-						if(frontierb.contains(node)) {
+						if(node.isSuccess()|| frontierb.contains(node)) {
+							if(frontierb.contains(node)) {
+								Plat= new Puzzle(node);
+								compTemp++;
+
+								Puzzle p = null;
+
+								Iterator<Puzzle> it = frontierb.iterator();
+								while(it.hasNext()) {
+									p = it.next();
+									if(p.printS().equals(node.printS())) {
+										break;
+									}
+								}
+								Plat2 = new Puzzle(p);
+								return true;
+							}else {
+								Plat= new Puzzle(node);
+								return true;
+
+							}
+								
+						}
+						if (!frontierf.contains(child)&&!explored.contains(child)) {
+							frontierf.add(child);
+						}
+				}}
+				if(!frontierb.isEmpty()) {
+					node = frontierb.pop();
+					compTemp++;
+					explored.add(node);
+					for (String b : ACTIONS) {
+						Puzzle child = new Puzzle(node);
+						compTemp++;
+						if(b.equals("H")){
+							if(node.moveHaut2()) {
+								child.Haut();
+							}
+						}
+						if(b.equals("B")){
+							if(node.moveBas2()) {
+								child.Bas();
+							
+							}
+						}
+						if(b.equals("D")){
+							if(node.moveDroite2()) {
+								child.Droite();
+							}
+						}
+						if(b.equals("G")){
+							if(node.moveGauche2()) {
+								child.Gauche();
+							}
+						}
+						if(frontierf.contains(node)) {
 							Plat= new Puzzle(node);
 							compTemp++;
 
 							Puzzle p = null;
 
-							Iterator<Puzzle> it = frontierb.iterator();
+							Iterator<Puzzle> it = frontierf.iterator();
 							while(it.hasNext()) {
 								p = it.next();
 								if(p.printS().equals(node.printS())) {
@@ -109,70 +166,18 @@ public class BD {
 								}
 							}
 							Plat2 = new Puzzle(p);
+							compTemp++;
 							return true;
-						}else {
-							Plat= new Puzzle(node);
-							return true;
-
 						}
-							
-					}
-					if (!frontierf.contains(child)&&!explored.contains(child)) {
-						frontierf.add(child);
-					}
-			}}
-			if(!frontierb.isEmpty()) {
-				node = frontierb.pop();
-				compTemp++;
-				explored.add(node);
-				for (String b : ACTIONS) {
-					Puzzle child = new Puzzle(node);
-					compTemp++;
-					if(b.equals("H")){
-						if(node.moveHaut2()) {
-							child.Haut();
+						if (!frontierb.contains(child)&&!explored.contains(child)) {
+							frontierb.add(child);
 						}
-					}
-					if(b.equals("B")){
-						if(node.moveBas2()) {
-							child.Bas();
-						
-						}
-					}
-					if(b.equals("D")){
-						if(node.moveDroite2()) {
-							child.Droite();
-						}
-					}
-					if(b.equals("G")){
-						if(node.moveGauche2()) {
-							child.Gauche();
-						}
-					}
-					if(frontierf.contains(node)) {
-						Plat= new Puzzle(node);
-						compTemp++;
-
-						Puzzle p = null;
-
-						Iterator<Puzzle> it = frontierf.iterator();
-						while(it.hasNext()) {
-							p = it.next();
-							if(p.printS().equals(node.printS())) {
-								break;
-							}
-						}
-						Plat2 = new Puzzle(p);
-						compTemp++;
-						return true;
-					}
-					if (!frontierb.contains(child)&&!explored.contains(child)) {
-						frontierb.add(child);
-					}
+				}
+				
+			}
 			}
 			
-		}
-			
+			return false;
 		
 	}
 }
