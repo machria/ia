@@ -48,7 +48,7 @@ public class App {
 			}
 				
 		}
-		System.out.println("Fin GFS");
+		
 
 		int gfs = 0;
 		for (int i = 0; i < resGFS.size(); i++) {
@@ -95,7 +95,7 @@ public class App {
 			}
 				
 		}
-		System.out.println("Fin Astar");
+		
 
 		ArrayList<Boolean> resUCS = new ArrayList<>();
 
@@ -132,7 +132,7 @@ public class App {
 			}
 				
 		}
-		System.out.println("Fin UCS");
+		
 		ArrayList<Boolean> resILS = new ArrayList<>();
 
 		// ILS
@@ -168,8 +168,7 @@ public class App {
 			}
 				
 		}
-
-		System.out.println("Fin ILS");
+		
 		int gfs2 = 0;
 		for (int i = 0; i < resGFS.size(); i++) {
 			if (resGFS.get(i))
@@ -234,9 +233,10 @@ public class App {
 						ids.getCompTemp(), duration);
 			}
 		}
+		
 		// DLS
 		ArrayList<Long> dlsDuration = new ArrayList();
-		ArrayList<Integer> dlssMem = new ArrayList();
+		ArrayList<Integer> dlsMem = new ArrayList();
 		ArrayList<Integer> dlsTemp = new ArrayList();
 		ArrayList<Integer> dlsMouvement = new ArrayList();
 		ArrayList<Integer> dlsCout = new ArrayList();
@@ -253,7 +253,7 @@ public class App {
 			}
 			long duration = System.currentTimeMillis() - start_time;
 			dlsDuration.add(duration);
-			dlssMem.add(dls.getCompMem());
+			dlsMem.add(dls.getCompMem());
 			dlsTemp.add(dls.getCompTemp());
 			if (dls == null)
 				App.saveSolutionToFile(a.getListPuzzle().get(i), "DLS", duration);
@@ -265,9 +265,10 @@ public class App {
 			}
 				
 		}
+		
 		// BFS
 		ArrayList<Long> bfsDuration = new ArrayList();
-		ArrayList<Integer> bfssMem = new ArrayList();
+		ArrayList<Integer> bfsMem = new ArrayList();
 		ArrayList<Integer> bfsTemp = new ArrayList();
 		ArrayList<Integer> bfsMouvement = new ArrayList();
 		ArrayList<Integer> bfsCout = new ArrayList();
@@ -284,18 +285,20 @@ public class App {
 			}
 			long duration = System.currentTimeMillis() - start_time;
 			bfsDuration.add(duration);
-			bfssMem.add(bfs.getCompMem());
+			bfsMem.add(bfs.getCompMem());
 			bfsTemp.add(bfs.getCompTemp());
 			if (bfs == null)
 				App.saveSolutionToFile(a.getListPuzzle().get(i), "BFS", duration);
 			else {
 				bfsCout.add(bfs.getTruePlat().getCout());
-				bfssMem.add(bfs.getTruePlat().getMove());
+				bfsMouvement.add(bfs.getTruePlat().getMove());
 				App.saveSolutionToFile(a.getListPuzzle().get(i), bfs.getTruePlat(), "BFS", bfs.getCompMem(),
 						bfs.getCompTemp(), duration);
 			}
 				
 		}
+		
+		
 		// BD
 		ArrayList<Long> bdDuration = new ArrayList();
 		ArrayList<Integer> bdMem = new ArrayList();
@@ -337,6 +340,7 @@ public class App {
 				bdMouvement.add(bdM);
 			}
 		}
+		
 		// DFS
 		ArrayList<Long> dfsDuration = new ArrayList();
 		ArrayList<Integer> dfsMem = new ArrayList();
@@ -368,6 +372,114 @@ public class App {
 			}
 				
 		}
+		System.out.println("Résultat GFS");
+		System.out.println("Duration");
+		System.out.println(gfsDuration);
+		System.out.println("Memory");
+		System.out.println(gfsMem);
+		System.out.println("Temporelle");
+		System.out.println(gfsTemp);
+		System.out.println("Mouvement");
+		System.out.println(gfsMouvement);
+		System.out.println("Cout");
+		System.out.println(gfsCout);
+		System.out.println("Fin GFS");
+		System.out.println("Résultat Astar");
+		System.out.println("Duration");
+		System.out.println(astarDuration);
+		System.out.println("Memory");
+		System.out.println(astarMem);
+		System.out.println("Temporelle");
+		System.out.println(astarTemp);
+		System.out.println("Mouvement");
+		System.out.println(astarMouvement);
+		System.out.println("Cout");
+		System.out.println(astarCout);
+		System.out.println("Fin Astar");
+		System.out.println("Résultat UCS");
+		System.out.println("Duration");
+		System.out.println(ucsDuration);
+		System.out.println("Memory");
+		System.out.println(ucsMem);
+		System.out.println("Temporelle");
+		System.out.println(ucsTemp);
+		System.out.println("Mouvement");
+		System.out.println(ucsMouvement);
+		System.out.println("Cout");
+		System.out.println(ucsCout);
+		System.out.println("Fin UCS");
+		System.out.println("Résultat ILS");
+		System.out.println("Duration");
+		System.out.println(ilsDuration);
+		System.out.println("Memory");
+		System.out.println(ilsMem);
+		System.out.println("Temporelle");
+		System.out.println(ilsTemp);
+		System.out.println("Mouvement");
+		System.out.println(ilsMouvement);
+		System.out.println("Cout");
+		System.out.println(ilsCout);
+		System.out.println("Fin ILS");
+		System.out.println("Résultat IDS");
+		System.out.println("Duration");
+		System.out.println(idsDuration);
+		System.out.println("Memory");
+		System.out.println(idsMem);
+		System.out.println("Temporelle");
+		System.out.println(idsTemp);
+		System.out.println("Mouvement");
+		System.out.println(idsMouvement);
+		System.out.println("Cout");
+		System.out.println(idsCout);
+		System.out.println("Fin IDS");
+		System.out.println("Résultat DLS");
+		System.out.println("Duration");
+		System.out.println(dlsDuration);
+		System.out.println("Memory");
+		System.out.println(dlsMem);
+		System.out.println("Temporelle");
+		System.out.println(dlsTemp);
+		System.out.println("Mouvement");
+		System.out.println(dlsMouvement);
+		System.out.println("Cout");
+		System.out.println(dlsCout);
+		System.out.println("Fin DLS");
+		System.out.println("Résultat BFS");
+		System.out.println("Duration");
+		System.out.println(bfsDuration);
+		System.out.println("Memory");
+		System.out.println(bfsMem);
+		System.out.println("Temporelle");
+		System.out.println(bfsTemp);
+		System.out.println("Mouvement");
+		System.out.println(bfsMouvement);
+		System.out.println("Cout");
+		System.out.println(bfsCout);
+		System.out.println("Fin BFS");
+		System.out.println("Résultat BD");
+		System.out.println("Duration");
+		System.out.println(bdDuration);
+		System.out.println("Memory");
+		System.out.println(bdMem);
+		System.out.println("Temporelle");
+		System.out.println(bdTemp);
+		System.out.println("Mouvement");
+		System.out.println(bdMouvement);
+		System.out.println("Cout");
+		System.out.println(bdCout);
+		System.out.println("Fin BD");
+		System.out.println("Résultat DFS");
+		System.out.println("Duration");
+		System.out.println(dfsDuration);
+		System.out.println("Memory");
+		System.out.println(dfsMem);
+		System.out.println("Temporelle");
+		System.out.println(dfsTemp);
+		System.out.println("Mouvement");
+		System.out.println(dfsMouvement);
+		System.out.println("Cout");
+		System.out.println(dfsCout);
+		System.out.println("Fin DFS");
 
 		/*
 		 * //System.out.println(p.isSuccess()); Scanner sc = new Scanner(System.in);
