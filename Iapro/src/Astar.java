@@ -106,69 +106,76 @@ public class Astar {
 			if (this.racine.isSuccess())
 				return true;
 			this.frontiere.add(this.end);
-			while (true) {
-				if (this.frontiere.isEmpty())
-					return false;
-				Puzzle node = this.frontiere.pollFirst();
-				compTemp++;
-				this.explored.add(node);
-				
-				/*
-				 * Iterator<Puzzle> itz = frontiere.iterator(); while(itz.hasNext()) {
-				 * System.out.println(itz.next().getScore()); } System.out.println(
-				 * "---------------------------------------------------------");
-				 */
-				 
-				for (String b : ACTIONS) {
-					Puzzle child = new Puzzle(node);
+			long start_time = System.currentTimeMillis();
+			long duration = System.currentTimeMillis() - start_time;
+			
+				while (true) {
+					while(duration<5000) {
+						duration = System.currentTimeMillis() - start_time;
+					if (this.frontiere.isEmpty())
+						return false;
+					Puzzle node = this.frontiere.pollFirst();
 					compTemp++;
-					if(b.equals("H")){
-						if(node.moveHaut()&&node.getLastAction()!="B") {
-							child.setScore(this.Score(child, "H"));
-							child.Haut();
-						}
-					}
-					if(b.equals("B")){
-						if(node.moveBas()&&node.getLastAction()!="H") {
-							child.setScore(this.Score(child, "B"));
-							child.Bas();
-						}
-					}
-					if(b.equals("D")){
-						if(node.moveDroite()&&node.getLastAction()!="G") {
-							child.setScore(this.Score(child, "D"));
-							child.Droite();
-						}
-					}
-					if(b.equals("G")){
-						if(node.moveGauche()&&node.getLastAction()!="D") {
-							child.setScore(this.Score(child, "G"));
-							child.Gauche();
-						}
-					}
-					if(!this.explored.contains(child) && !this.frontiere.contains(child)) {
-						if(child.isSuccess()) {
-							this.end = child;
-							return true;
-						}
-						this.frontiere.add(child);
-					}
-					Puzzle p = new Puzzle();
-					if(this.frontiere.contains(child)) {
-						Iterator<Puzzle> it = frontiere.iterator();
-						while(it.hasNext()) {
-							p = it.next();
-							if(p.getTab().equals(child.getTab())) {
-								break;
+					this.explored.add(node);
+					
+					/*
+					 * Iterator<Puzzle> itz = frontiere.iterator(); while(itz.hasNext()) {
+					 * System.out.println(itz.next().getScore()); } System.out.println(
+					 * "---------------------------------------------------------");
+					 */
+					 
+					for (String b : ACTIONS) {
+						Puzzle child = new Puzzle(node);
+						compTemp++;
+						if(b.equals("H")){
+							if(node.moveHaut()&&node.getLastAction()!="B") {
+								child.setScore(this.Score(child, "H"));
+								child.Haut();
 							}
 						}
-						if(p.getScore()>child.getScore()) {
-							this.frontiere.remove(p);
+						if(b.equals("B")){
+							if(node.moveBas()&&node.getLastAction()!="H") {
+								child.setScore(this.Score(child, "B"));
+								child.Bas();
+							}
+						}
+						if(b.equals("D")){
+							if(node.moveDroite()&&node.getLastAction()!="G") {
+								child.setScore(this.Score(child, "D"));
+								child.Droite();
+							}
+						}
+						if(b.equals("G")){
+							if(node.moveGauche()&&node.getLastAction()!="D") {
+								child.setScore(this.Score(child, "G"));
+								child.Gauche();
+							}
+						}
+						if(!this.explored.contains(child) && !this.frontiere.contains(child)) {
+							if(child.isSuccess()) {
+								this.end = child;
+								return true;
+							}
 							this.frontiere.add(child);
+						}
+						Puzzle p = new Puzzle();
+						if(this.frontiere.contains(child)) {
+							Iterator<Puzzle> it = frontiere.iterator();
+							while(it.hasNext()) {
+								p = it.next();
+								if(p.getTab().equals(child.getTab())) {
+									break;
+								}
+							}
+							if(p.getScore()>child.getScore()) {
+								this.frontiere.remove(p);
+								this.frontiere.add(child);
+							}
 						}
 					}
 				}
-			}
+					return false;
+				}
 		}
 		
 
@@ -188,7 +195,7 @@ public class Astar {
 			this.compMem = compMem;
 		}
 
-	public void solve() {
+	public boolean solve() {
 			boolean check = astar();
 			compMem=this.frontiere.size()+this.getExplored().size();
 
@@ -199,8 +206,10 @@ public class Astar {
 					System.out.println(this.getEnd().getListMove().get(i));
 				}
 				System.out.println(this.getEnd().getScore());
+				return true;
 			}else {
 				System.out.println(this.getFrontiere().size()+this.getExplored().size());
+				return false;
 			}
 			
 		

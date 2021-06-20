@@ -78,66 +78,74 @@ public class ILS {
 			return true;
 		this.frontiere.add(this.racine);
 		compTemp++;
-		while(true) {
-			if (this.frontiere.isEmpty()) {
-				return false;
-			}
-				
-			this.profondeur = this.profondeur+1;
-			for (int i = 0 ; i<this.frontiere.size();i++) {
-				Puzzle b = this.frontiere.get(0);
-				compTemp++;
-				for (String a : ACTIONS) {
-					Puzzle child = new Puzzle(b);
+		long start_time = System.currentTimeMillis();
+		long duration = System.currentTimeMillis() - start_time;
+		
+			while(true) {
+				while(duration<5000) {
+					duration = System.currentTimeMillis() - start_time;
+				if (this.frontiere.isEmpty()) {
+					return false;
+				}
+					
+				this.profondeur = this.profondeur+1;
+				for (int i = 0 ; i<this.frontiere.size();i++) {
+					Puzzle b = this.frontiere.get(0);
 					compTemp++;
-					if(a.equals("H")){
-						if(b.moveHaut()&&b.getLastAction()!="B") {
-							child.Haut();
-							if(!this.explore.contains(child) && !this.frontiere.contains(child) && !this.frontiereTmp.contains(child)) {
-								this.frontiereTmp.add(child);
+					for (String a : ACTIONS) {
+						Puzzle child = new Puzzle(b);
+						compTemp++;
+						if(a.equals("H")){
+							if(b.moveHaut()&&b.getLastAction()!="B") {
+								child.Haut();
+								if(!this.explore.contains(child) && !this.frontiere.contains(child) && !this.frontiereTmp.contains(child)) {
+									this.frontiereTmp.add(child);
+								}
+									
 							}
-								
+						}
+						if(a.equals("B")){
+							if(b.moveBas()&&b.getLastAction()!="H") {
+								child.Bas();
+								if(!this.explore.contains(child) && !this.frontiere.contains(child) && !this.frontiereTmp.contains(child)) {
+									this.frontiereTmp.add(child);
+								}
+							}
+						}
+						if(a.equals("D")){
+							if(b.moveDroite()&&b.getLastAction()!="G") {
+								child.Droite();
+								if(!this.explore.contains(child) && !this.frontiere.contains(child) && !this.frontiereTmp.contains(child)) {
+									this.frontiereTmp.add(child);
+								}
+							}
+						}
+						if(a.equals("G")){
+							if(b.moveGauche()&&b.getLastAction()!="D") {
+								child.Gauche();
+								if(!this.explore.contains(child) && !this.frontiere.contains(child) && !this.frontiereTmp.contains(child)) {
+									this.frontiereTmp.add(child);
+								}
+							}
 						}
 					}
-					if(a.equals("B")){
-						if(b.moveBas()&&b.getLastAction()!="H") {
-							child.Bas();
-							if(!this.explore.contains(child) && !this.frontiere.contains(child) && !this.frontiereTmp.contains(child)) {
-								this.frontiereTmp.add(child);
-							}
-						}
+				
+				this.frontiere.remove(b);
+				}
+				this.copieFrontiereTmpDansFrontiere();
+				for(Puzzle b : frontiere) {
+					if(b.isSuccess()) {
+						System.out.println(b);
+						this.solution = b;
+						return true;
 					}
-					if(a.equals("D")){
-						if(b.moveDroite()&&b.getLastAction()!="G") {
-							child.Droite();
-							if(!this.explore.contains(child) && !this.frontiere.contains(child) && !this.frontiereTmp.contains(child)) {
-								this.frontiereTmp.add(child);
-							}
-						}
-					}
-					if(a.equals("G")){
-						if(b.moveGauche()&&b.getLastAction()!="D") {
-							child.Gauche();
-							if(!this.explore.contains(child) && !this.frontiere.contains(child) && !this.frontiereTmp.contains(child)) {
-								this.frontiereTmp.add(child);
-							}
-						}
+					else {
+						this.explore.add(b);
 					}
 				}
-			
-			this.frontiere.remove(b);
 			}
-			this.copieFrontiereTmpDansFrontiere();
-			for(Puzzle b : frontiere) {
-				if(b.isSuccess()) {
-					System.out.println(b);
-					this.solution = b;
-					return true;
-				}
-				else {
-					this.explore.add(b);
-				}
-			}
+				return false;
+
 		}
 	}
 	public int getCompTemp() {
@@ -156,7 +164,7 @@ public class ILS {
 		this.compMem = compMem;
 	}
 	
-	public void solve() {
+	public boolean solve() {
 		boolean check = ils();
 		compMem=this.explore.size()+this.frontiere.size()+this.frontiereTmp.size();
 		if(check) {
@@ -166,8 +174,10 @@ public class ILS {
 				System.out.println(this.getEnd().getListMove().get(i));
 			}
 			System.out.println(this.getEnd().getScore());
+			return true;
 		}else {
 			System.out.println(this.getFrontiere().size()+this.getExplore().size());
+			return false;
 		}
 		
 	}

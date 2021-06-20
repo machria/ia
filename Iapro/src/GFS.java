@@ -142,55 +142,63 @@ public class GFS {
 		if (this.racine.isSuccess())
 			return true;
 		this.frontiere.add(this.end);
-		while (true) {
-			if (this.frontiere.isEmpty())
-				return false;
-			Puzzle node = this.frontiere.pollFirst();
-			compTemp++;
-			this.explored.add(node);
-			
-			/*
-			 * Iterator<Puzzle> itz = frontiere.iterator(); while(itz.hasNext()) {
-			 * System.out.println(itz.next().getScore()); } System.out.println(
-			 * "---------------------------------------------------------");
-			 */
-			
-			for (String b : ACTIONS) {
-				Puzzle child = new Puzzle(node);
+		long start_time = System.currentTimeMillis();
+		long duration = System.currentTimeMillis() - start_time;
+		
+			while (true) {
+				while(duration<5000) {
+					duration = System.currentTimeMillis() - start_time;
+				if (this.frontiere.isEmpty())
+					return false;
+				Puzzle node = this.frontiere.pollFirst();
 				compTemp++;
-				if(b.equals("H")){
-					if(node.moveHaut()) {
-						child.setScore(this.Score2(child, "H"));
-						child = child.Haut();
+				this.explored.add(node);
+				
+				/*
+				 * Iterator<Puzzle> itz = frontiere.iterator(); while(itz.hasNext()) {
+				 * System.out.println(itz.next().getScore()); } System.out.println(
+				 * "---------------------------------------------------------");
+				 */
+				
+				for (String b : ACTIONS) {
+					Puzzle child = new Puzzle(node);
+					compTemp++;
+					if(b.equals("H")){
+						if(node.moveHaut()) {
+							child.setScore(this.Score2(child, "H"));
+							child = child.Haut();
+						}
+					}
+					else if(b.equals("B")){
+						if(node.moveBas()) {
+							child.setScore(this.Score2(child, "B"));
+							child = child.Bas();
+						}
+					}
+					else if(b.equals("D")){
+						if(node.moveDroite()) {
+							child.setScore(this.Score2(child, "D"));
+							child=child.Droite();
+						}
+					}
+					else{
+						if(node.moveGauche()) {
+							child.setScore(this.Score2(child, "G"));
+							child=child.Gauche();
+						}
+					}
+					if(!this.explored.contains(child) && !this.frontiere.contains(child)) {
+						if(child.isSuccess()) {
+							this.end = child;
+							return true;
+						}
+						this.frontiere.add(child);
 					}
 				}
-				else if(b.equals("B")){
-					if(node.moveBas()) {
-						child.setScore(this.Score2(child, "B"));
-						child = child.Bas();
-					}
-				}
-				else if(b.equals("D")){
-					if(node.moveDroite()) {
-						child.setScore(this.Score2(child, "D"));
-						child=child.Droite();
-					}
-				}
-				else{
-					if(node.moveGauche()) {
-						child.setScore(this.Score2(child, "G"));
-						child=child.Gauche();
-					}
-				}
-				if(!this.explored.contains(child) && !this.frontiere.contains(child)) {
-					if(child.isSuccess()) {
-						this.end = child;
-						return true;
-					}
-					this.frontiere.add(child);
-				}
+				
 			}
-			
+				return false;
+
 		}
 	}
 	public boolean solve() {
