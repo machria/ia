@@ -12,6 +12,13 @@ public class Experimentation {
 		this.ListPuzzle = new ArrayList<Puzzle>();
 	}
 	
+	public Experimentation(Puzzle p) {
+		this.tailleList = tailleList;
+		this.taillePuzzle = taillePuzzle;
+		this.ListPuzzle = new ArrayList<Puzzle>();
+		this.ListPuzzle.add(p);
+	}
+
 	public void init() {
 		for(int i =0; i <this.tailleList;i++) {
 			Puzzle p = new Puzzle(this.taillePuzzle);
