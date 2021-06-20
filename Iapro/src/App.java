@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 public class App {
 
 	public static void main(String[] args) throws Exception {
-		Experimentation a = new Experimentation(5, 3);
+		Experimentation a = new Experimentation(50, 5);
 		a.init();
 		ArrayList<Boolean> resGFS = new ArrayList<>();
 
@@ -37,6 +37,17 @@ public class App {
 				App.saveSolutionToFile(a.getListPuzzle().get(i), gfs.getEnd(), "GFS",gfs.getCompMem(),gfs.getCompTemp(),duration);
 		}
 		System.out.println("Fin GFS");
+		
+		int gfs=0;
+		for(int i=0;i<resGFS.size();i++) {
+			if(resGFS.get(i))
+				gfs++;
+		}
+		float moyGFS=(float)gfs/resGFS.size();
+		System.out.println("GFS : "+moyGFS);
+		System.exit(93);
+
+		
 		ArrayList<Boolean> resAstar = new ArrayList<>();
 
 		//Astar
@@ -113,12 +124,12 @@ public class App {
 		}
 
 		System.out.println("Fin ILS");
-		int gfs=0;
+		int gfs2=0;
 		for(int i=0;i<resGFS.size();i++) {
 			if(resGFS.get(i))
 				gfs++;
 		}
-		float moyGFS=(float)gfs/resGFS.size();
+		float moyGFS2=(float)gfs/resGFS.size();
 		System.out.println("GFS : "+moyGFS);
 		int astar=0;
 		for(int i=0;i<resAstar.size();i++) {

@@ -146,7 +146,7 @@ public class GFS {
 		long duration = System.currentTimeMillis() - start_time;
 		
 			while (true) {
-				while(duration<5000) {
+				while(duration<600000) {
 					duration = System.currentTimeMillis() - start_time;
 				if (this.frontiere.isEmpty())
 					return false;
