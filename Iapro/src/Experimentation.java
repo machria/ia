@@ -15,6 +15,9 @@ public class Experimentation {
 	public void init() {
 		for(int i =0; i <this.tailleList;i++) {
 			Puzzle p = new Puzzle(this.taillePuzzle);
+			while(p.isSuccess()) {
+				p = new Puzzle(this.taillePuzzle);
+			}
 			p.print();
 			this.ListPuzzle.add(p);
 		}

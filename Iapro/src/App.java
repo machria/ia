@@ -11,172 +11,245 @@ import java.util.concurrent.TimeUnit;
 public class App {
 
 	public static void main(String[] args) throws Exception {
-		Experimentation a = new Experimentation(50, 5);
+		Experimentation a = new Experimentation(50, 2);
 		a.init();
 		ArrayList<Boolean> resGFS = new ArrayList<>();
 
-		//GFS
+		// GFS
 		for (int i = 0; i < a.getListPuzzle().size(); i++) {
 			GFS gfs = new GFS(a.getListPuzzle().get(i));
 			long start_time = System.currentTimeMillis();
 			try {
 				resGFS.add(gfs.solve());
-			}catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println("Erreur GFS");
 
-			}
-			catch(OutOfMemoryError o) {
-				gfs=null;
+			} catch (OutOfMemoryError o) {
+				gfs = null;
 				System.out.println("Erreur GFS");
 
 			}
 			long duration = System.currentTimeMillis() - start_time;
-			if(gfs==null)
-				App.saveSolutionToFile(a.getListPuzzle().get(i),"GFS",duration);
-			else 
-				App.saveSolutionToFile(a.getListPuzzle().get(i), gfs.getEnd(), "GFS",gfs.getCompMem(),gfs.getCompTemp(),duration);
+			if (gfs == null)
+				App.saveSolutionToFile(a.getListPuzzle().get(i), "GFS", duration);
+			else
+				App.saveSolutionToFile(a.getListPuzzle().get(i), gfs.getEnd(), "GFS", gfs.getCompMem(),
+						gfs.getCompTemp(), duration);
 		}
 		System.out.println("Fin GFS");
-		
-		int gfs=0;
-		for(int i=0;i<resGFS.size();i++) {
-			if(resGFS.get(i))
+
+		int gfs = 0;
+		for (int i = 0; i < resGFS.size(); i++) {
+			if (resGFS.get(i))
 				gfs++;
 		}
-		float moyGFS=(float)gfs/resGFS.size();
-		System.out.println("GFS : "+moyGFS);
-		System.exit(93);
+		float moyGFS = (float) gfs / resGFS.size();
+		System.out.println("GFS : " + moyGFS);
 
-		
 		ArrayList<Boolean> resAstar = new ArrayList<>();
 
-		//Astar
+		// Astar
 		for (int i = 0; i < a.getListPuzzle().size(); i++) {
 			Astar astar = new Astar(a.getListPuzzle().get(i));
 			long start_time = System.currentTimeMillis();
 			try {
 				resAstar.add(astar.solve());
-			}catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println("Erreur Astar");
 
-			}
-			catch(OutOfMemoryError o) {
-				astar=null;
+			} catch (OutOfMemoryError o) {
+				astar = null;
 				System.out.println("Erreur Astar");
 
 			}
 			long duration = System.currentTimeMillis() - start_time;
 			System.out.println("Done");
-			if(astar==null)
-				App.saveSolutionToFile(a.getListPuzzle().get(i),"Astar",duration);
-			else 
-				App.saveSolutionToFile(a.getListPuzzle().get(i), astar.getEnd(), "Astar",astar.getCompMem(),astar.getCompTemp(),duration);
+			if (astar == null)
+				App.saveSolutionToFile(a.getListPuzzle().get(i), "Astar", duration);
+			else
+				App.saveSolutionToFile(a.getListPuzzle().get(i), astar.getEnd(), "Astar", astar.getCompMem(),
+						astar.getCompTemp(), duration);
 		}
 		System.out.println("Fin Astar");
 
 		ArrayList<Boolean> resUCS = new ArrayList<>();
 
-
-		//UCS
+		// UCS
 		for (int i = 0; i < a.getListPuzzle().size(); i++) {
 			UCS ucs = new UCS(a.getListPuzzle().get(i));
 			long start_time = System.currentTimeMillis();
 			try {
-				resUCS.add( ucs.solve());
-			}catch(Exception e) {
+				resUCS.add(ucs.solve());
+			} catch (Exception e) {
 				System.out.println("Erreur UCS");
 
-			}
-			catch(OutOfMemoryError o) {
-				ucs=null;
+			} catch (OutOfMemoryError o) {
+				ucs = null;
 				System.out.println("Erreur UCS");
 
 			}
 			long duration = System.currentTimeMillis() - start_time;
-			if(ucs==null)
-				App.saveSolutionToFile(a.getListPuzzle().get(i),"UCS",duration);
-			else 
-				App.saveSolutionToFile(a.getListPuzzle().get(i), ucs.getEnd(), "UCS",ucs.getCompMem(),ucs.getCompTemp(),duration);
+			if (ucs == null)
+				App.saveSolutionToFile(a.getListPuzzle().get(i), "UCS", duration);
+			else
+				App.saveSolutionToFile(a.getListPuzzle().get(i), ucs.getEnd(), "UCS", ucs.getCompMem(),
+						ucs.getCompTemp(), duration);
 		}
 		System.out.println("Fin UCS");
 		ArrayList<Boolean> resILS = new ArrayList<>();
 
-		//ILS
+		// ILS
 		for (int i = 0; i < a.getListPuzzle().size(); i++) {
 			ILS ils = new ILS(a.getListPuzzle().get(i));
 			long start_time = System.currentTimeMillis();
 			try {
 				resILS.add(ils.solve());
-			}catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println("Erreur ILS");
 
-			}
-			catch(OutOfMemoryError o) {
-				ils=null;
+			} catch (OutOfMemoryError o) {
+				ils = null;
 				System.out.println("Erreur ILS");
 
 			}
 			long duration = System.currentTimeMillis() - start_time;
-			if(ils==null)
-				App.saveSolutionToFile(a.getListPuzzle().get(i),"ILS",duration);
-			else 
-				App.saveSolutionToFile(a.getListPuzzle().get(i), ils.getEnd(), "ILS",ils.getCompMem(),ils.getCompTemp(),duration);
+			if (ils == null)
+				App.saveSolutionToFile(a.getListPuzzle().get(i), "ILS", duration);
+			else
+				App.saveSolutionToFile(a.getListPuzzle().get(i), ils.getEnd(), "ILS", ils.getCompMem(),
+						ils.getCompTemp(), duration);
 		}
 
 		System.out.println("Fin ILS");
-		int gfs2=0;
-		for(int i=0;i<resGFS.size();i++) {
-			if(resGFS.get(i))
+		int gfs2 = 0;
+		for (int i = 0; i < resGFS.size(); i++) {
+			if (resGFS.get(i))
 				gfs++;
 		}
-		float moyGFS2=(float)gfs/resGFS.size();
-		System.out.println("GFS : "+moyGFS);
-		int astar=0;
-		for(int i=0;i<resAstar.size();i++) {
-			if(resAstar.get(i))
+		float moyGFS2 = (float) gfs / resGFS.size();
+		System.out.println("GFS : " + moyGFS);
+		int astar = 0;
+		for (int i = 0; i < resAstar.size(); i++) {
+			if (resAstar.get(i))
 				astar++;
 		}
-		float moyAstar=(float)astar/resAstar.size();
+		float moyAstar = (float) astar / resAstar.size();
 
-		System.out.println("Astar : "+moyAstar);
+		System.out.println("Astar : " + moyAstar);
 
-		int ucs=0;
-		for(int i=0;i<resUCS.size();i++) {
-			if(resUCS.get(i))
+		int ucs = 0;
+		for (int i = 0; i < resUCS.size(); i++) {
+			if (resUCS.get(i))
 				ucs++;
 		}
-		float moyUCS=(float)ucs/resUCS.size();
+		float moyUCS = (float) ucs / resUCS.size();
 
-		System.out.println("UCS : "+moyUCS);
+		System.out.println("UCS : " + moyUCS);
 
-		int ils=0;
-		for(int i=0;i<resILS.size();i++) {
-			if(resILS.get(i))
+		int ils = 0;
+		for (int i = 0; i < resILS.size(); i++) {
+			if (resILS.get(i))
 				ils++;
 		}
-		float moyILS= (float)ils/resILS.size();
-		System.out.println("ILS : "+moyILS);
-		System.exit(93);
-		//IDS		
-		int limite=0;		for (int i = 0; i < a.getListPuzzle().size(); i++) {			IDS ids = new IDS(a.getListPuzzle().get(i));			long start_time = System.currentTimeMillis();			try {				ids.solve();			}catch(Exception e) {				System.out.println("Erreur IDS");
-		}			catch(OutOfMemoryError o) {				ids=null;				System.out.println("Erreur IDS");							}			long duration = System.currentTimeMillis() - start_time;			if(ids==null)				App.saveSolutionToFile(a.getListPuzzle().get(i),"IDS",duration);			else {				limite = ids.getCo();				App.saveSolutionToFile(a.getListPuzzle().get(i), ids.getEnd(), "IDS",ids.getCompMem(),ids.getCompTemp(),duration);			}					}		
-		//DLS		
-		for (int i = 0; i < a.getListPuzzle().size(); i++) {			DLS dls = new DLS(a.getListPuzzle().get(i));			long start_time = System.currentTimeMillis();			try {				dls.solve(limite,a.getListPuzzle().get(i));			}catch(Exception e) {				System.out.println("Erreur DLS");
-		}			catch(OutOfMemoryError o) {				dls=null;				System.out.println("Erreur DLS");}			long duration = System.currentTimeMillis() - start_time;			if(dls==null)
-			App.saveSolutionToFile(a.getListPuzzle().get(i),"DLS",duration);			else App.saveSolutionToFile(a.getListPuzzle().get(i), dls.getTruePlat(), "DLS",dls.getCompMem(),dls.getCompTemp(),duration);		}
-		//BFS		
-		for (int i = 0; i < a.getListPuzzle().size(); i++) {			BFS bfs = new BFS(a.getListPuzzle().get(i));			long start_time = System.currentTimeMillis();			try {				bfs.solve();			}catch(Exception e) {				System.out.println("Erreur BFS");
-		}			catch(OutOfMemoryError o) {				bfs=null;				System.out.println("Erreur BFS");
-		}			long duration = System.currentTimeMillis() - start_time;			if(bfs==null)				App.saveSolutionToFile(a.getListPuzzle().get(i),"BFS",duration);			else App.saveSolutionToFile(a.getListPuzzle().get(i), bfs.getTruePlat(), "BFS",bfs.getCompMem(),bfs.getCompTemp(),duration);	}
-		//BD				
-		for (int i = 0; i < a.getListPuzzle().size(); i++) {					BD bd = new BD(a.getListPuzzle().get(i));					long start_time = System.currentTimeMillis();					try {						bd.solve();					}catch(Exception e) {						System.out.println("Erreur BD");					}									catch(OutOfMemoryError o) {						bd=null;						System.out.println("Erreur BD");
-		}					long duration = System.currentTimeMillis() - start_time;					if(bd==null)						App.saveSolutionToFile(a.getListPuzzle().get(i),"BD",duration);					else					App.saveSolutionToFile(a.getListPuzzle().get(i), bd,duration);				}				
-		//DFS				
-		for (int i = 0; i < a.getListPuzzle().size(); i++) {					DFS dfs = new DFS(a.getListPuzzle().get(i));					long start_time = System.currentTimeMillis();
-		try {						dfs.solve();					}catch(Exception e) {						System.out.println("Erreur DFS");
-		}					catch(OutOfMemoryError o) {						dfs = null;						System.out.println("Erreur DFS");
-		}					long duration = System.currentTimeMillis() - start_time;					if(dfs==null)						App.saveSolutionToFile(a.getListPuzzle().get(i),"DFS",duration);					else						App.saveSolutionToFile(a.getListPuzzle().get(i), dfs.getTruePlat(), "DFS",dfs.getCompMem(),dfs.getCompTemp(),duration);				}
-
+		float moyILS = (float) ils / resILS.size();
+		System.out.println("ILS : " + moyILS);
+		// IDS
+		int limite = 0;
+		for (int i = 0; i < a.getListPuzzle().size(); i++) {
+			IDS ids = new IDS(a.getListPuzzle().get(i));
+			long start_time = System.currentTimeMillis();
+			try {
+				ids.solve();
+			} catch (Exception e) {
+				System.out.println("Erreur IDS");
+			} catch (OutOfMemoryError o) {
+				ids = null;
+				System.out.println("Erreur IDS");
+			}
+			long duration = System.currentTimeMillis() - start_time;
+			if (ids == null)
+				App.saveSolutionToFile(a.getListPuzzle().get(i), "IDS", duration);
+			else {
+				limite = ids.getCo();
+				App.saveSolutionToFile(a.getListPuzzle().get(i), ids.getEnd(), "IDS", ids.getCompMem(),
+						ids.getCompTemp(), duration);
+			}
+		}
+		// DLS
+		for (int i = 0; i < a.getListPuzzle().size(); i++) {
+			DLS dls = new DLS(a.getListPuzzle().get(i));
+			long start_time = System.currentTimeMillis();
+			try {
+				dls.solve(limite, a.getListPuzzle().get(i));
+			} catch (Exception e) {
+				System.out.println("Erreur DLS");
+			} catch (OutOfMemoryError o) {
+				dls = null;
+				System.out.println("Erreur DLS");
+			}
+			long duration = System.currentTimeMillis() - start_time;
+			if (dls == null)
+				App.saveSolutionToFile(a.getListPuzzle().get(i), "DLS", duration);
+			else
+				App.saveSolutionToFile(a.getListPuzzle().get(i), dls.getTruePlat(), "DLS", dls.getCompMem(),
+						dls.getCompTemp(), duration);
+		}
+		// BFS
+		for (int i = 0; i < a.getListPuzzle().size(); i++) {
+			BFS bfs = new BFS(a.getListPuzzle().get(i));
+			long start_time = System.currentTimeMillis();
+			try {
+				bfs.solve();
+			} catch (Exception e) {
+				System.out.println("Erreur BFS");
+			} catch (OutOfMemoryError o) {
+				bfs = null;
+				System.out.println("Erreur BFS");
+			}
+			long duration = System.currentTimeMillis() - start_time;
+			if (bfs == null)
+				App.saveSolutionToFile(a.getListPuzzle().get(i), "BFS", duration);
+			else
+				App.saveSolutionToFile(a.getListPuzzle().get(i), bfs.getTruePlat(), "BFS", bfs.getCompMem(),
+						bfs.getCompTemp(), duration);
+		}
+		// BD
+		for (int i = 0; i < a.getListPuzzle().size(); i++) {
+			BD bd = new BD(a.getListPuzzle().get(i));
+			long start_time = System.currentTimeMillis();
+			try {
+				bd.solve();
+			} catch (Exception e) {
+				System.out.println("Erreur BD");
+			} catch (OutOfMemoryError o) {
+				bd = null;
+				System.out.println("Erreur BD");
+			}
+			long duration = System.currentTimeMillis() - start_time;
+			if (bd == null)
+				App.saveSolutionToFile(a.getListPuzzle().get(i), "BD", duration);
+			else
+				App.saveSolutionToFile(a.getListPuzzle().get(i), bd, duration);
+		}
+		// DFS
+		for (int i = 0; i < a.getListPuzzle().size(); i++) {
+			DFS dfs = new DFS(a.getListPuzzle().get(i));
+			long start_time = System.currentTimeMillis();
+			try {
+				dfs.solve();
+			} catch (Exception e) {
+				System.out.println("Erreur DFS");
+			} catch (OutOfMemoryError o) {
+				dfs = null;
+				System.out.println("Erreur DFS");
+			}
+			long duration = System.currentTimeMillis() - start_time;
+			if (dfs == null)
+				App.saveSolutionToFile(a.getListPuzzle().get(i), "DFS", duration);
+			else
+				App.saveSolutionToFile(a.getListPuzzle().get(i), dfs.getTruePlat(), "DFS", dfs.getCompMem(),
+						dfs.getCompTemp(), duration);
+		}
 
 		/*
 		 * //System.out.println(p.isSuccess()); Scanner sc = new Scanner(System.in);
@@ -449,8 +522,7 @@ public class App {
 			writer.write(LocalDateTime.now() + " Mouvement : " + co + System.lineSeparator());
 			writer.write(LocalDateTime.now() + " Cout : " + puzzle.getCout() + System.lineSeparator());
 			writer.write(LocalDateTime.now() + " Complexité mémoire : " + bd.getCompMem() + System.lineSeparator());
-			writer.write(
-					LocalDateTime.now() + " Complexité temporelle : " + bd.getCompTemp() + System.lineSeparator());
+			writer.write(LocalDateTime.now() + " Complexité temporelle : " + bd.getCompTemp() + System.lineSeparator());
 			writer.write(LocalDateTime.now() + " Duration (ms) : " + duration + System.lineSeparator());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
