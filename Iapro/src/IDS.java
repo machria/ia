@@ -34,7 +34,7 @@ public class IDS {
 		return dls.getTruePlat();
 	}
 	public int getCompTemp() {
-		return compTemp;
+		return dls.getCompTemp();
 	}
 
 	public void setCompTemp(int compTemp) {
@@ -42,7 +42,7 @@ public class IDS {
 	}
 
 	public int getCompMem() {
-		return compMem;
+		return dls.getCompMem();
 	}
 
 	public void setCompMem(int compMem) {
