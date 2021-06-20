@@ -126,7 +126,7 @@ public class BFS {
 	public void setCompMem(int compMem) {
 		this.compMem = compMem;
 	}
-	public void solve() {
+	public boolean solve() {
 		boolean check = bfs();
 		compMem= this.frontier.size()+this.explored.size();
 		if(check) {
@@ -136,9 +136,10 @@ public class BFS {
 				System.out.println(this.getTruePlat().getListMove().get(i));
 			}
 			System.out.println(this.getTruePlat().getScore());
+			return true;
 		}else {
 			System.out.println(this.getFrontier().size()+this.getExplored().size());
-			
+			return false;
 		}
 		
 	}
